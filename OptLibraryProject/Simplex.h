@@ -110,6 +110,7 @@ namespace OptLib
 		return result;
 	}
 
+
 	template<size_t dim>
 	Point<dim> abs(const Point<dim>& arr) {
 		Point<dim> result;
@@ -137,6 +138,7 @@ namespace OptLib
 		{
 			return p[i];
 		}
+
 
 		operator Point<dim>()	//оператор неявного приведения
 		{
