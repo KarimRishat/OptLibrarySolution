@@ -230,11 +230,24 @@ namespace OptLib
 		return res;
 	}
 
+	template<size_t dim>
+	PointVal<dim> operator+ (const double& Scalar, const PointVal<dim>& p1)
+	{
+		return p1 + Scalar;
+	}
+
 
 	template<size_t dim>
 	PointVal<dim> operator- (const PointVal<dim>& p1, const double& Scalar)
 	{
 		PointVal<dim> res{ p1.p - Scalar, p1.val };
+		return res;
+	}
+
+	template<size_t dim>
+	PointVal<dim> operator- (const double& Scalar, const PointVal<dim>& p1)
+	{
+		PointVal<dim> res{ Scalar - p1.p, p1.val };
 		return res;
 	}
 
@@ -247,9 +260,22 @@ namespace OptLib
 	}
 
 	template<size_t dim>
+	PointVal<dim> operator* (const double& Scalar, const PointVal<dim>& p1)
+	{
+		return p1 * Scalar;
+	}
+
+	template<size_t dim>
 	PointVal<dim> operator/ (const PointVal<dim>& p1, const double& Scalar)
 	{
 		PointVal<dim> res{ p1.p / Scalar, p1.val };
+		return res;
+	}
+
+	template<size_t dim>
+	PointVal<dim> operator/ (const double& Scalar, const PointVal<dim>& p1)
+	{
+		PointVal<dim> res{ Scalar / p1.p , p1.val };
 		return res;
 	}
 

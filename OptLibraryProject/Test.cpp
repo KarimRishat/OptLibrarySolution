@@ -201,7 +201,7 @@ void Tests::PointvalMultScal()
     Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
     double v1 = -302.55;
     PointVal<n> f1{ p1,v1 };
-    PointVal<n> f2 = f1 * x;
+    PointVal<n> f2 =  x * f1;
     std::cout << '\n' << f1 << '\n' << "*\n" << x << '\n'
         << "result:\n" << f2 << '\n';
 }
