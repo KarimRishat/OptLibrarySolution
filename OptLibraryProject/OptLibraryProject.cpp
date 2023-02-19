@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <iostream>
 #include "Test.h"
 
 
@@ -15,6 +16,11 @@ int main()
     Tests::test9();
     Tests::test10();
     Tests::test11();
+    std::cout <<'\n' << '\t' << "POINT VAL\n";
     Tests::PointvalPlus();
     Tests::PointValMinus();
+    Tests::PointvalMult();
+    Tests::PointvalDiv();
+    Tests::Pointvalsqrt();
+    Tests::Pointvalabs();
 }

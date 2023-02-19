@@ -194,6 +194,34 @@ namespace OptLib
 		return res;
 	}
 
+	template<size_t dim>
+	PointVal<dim> operator* (const PointVal<dim>& p1, const PointVal<dim>& p2)
+	{
+		PointVal<dim> res{ p1.p * p2.p, p1.val * p2.val };
+		return res;
+	}
+
+	template<size_t dim>
+	PointVal<dim> operator/ (const PointVal<dim>& p1, const PointVal<dim>& p2)
+	{
+		PointVal<dim> res{ p1.p / p2.p, p1.val / p2.val };
+		return res;
+	}
+
+	template<size_t dim>
+	PointVal<dim> sqrt (const PointVal<dim>& p1)
+	{
+		PointVal<dim> res{ sqrt(p1.p), std::sqrt(p1.val) };
+		return res;
+	}
+
+	template<size_t dim>
+	PointVal<dim> abs(const PointVal<dim>& p1)
+	{
+		PointVal<dim> res{ abs(p1.p), std::abs(p1.val) };
+		return res;
+	}
+
 }//Optlib
 /*
 	Print: x,a

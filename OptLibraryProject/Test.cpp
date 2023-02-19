@@ -123,3 +123,49 @@ void Tests::PointValMinus()
     std::cout << '\n' << f1 << '\n' << "-\n" << f2 << '\n' 
         << "result:\n" << f3 << '\n';
 }
+
+void Tests::PointvalMult()
+{
+    constexpr size_t n = 5;
+    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
+    Point<n> p2 = { 6.0, 3.5, 4.3, 6.503, 20.3 };
+    double v1 = 302.55, v2 = 905.15;
+    PointVal<n> f1{ p1,v1 };
+    PointVal<n> f2{ p2,v2 };
+    PointVal<n> f3 = f1 * f2;
+    std::cout << '\n' << f1 << '\n' << "*\n" << f2 << '\n'
+        << "result:\n" << f3 << '\n';
+}
+
+void Tests::PointvalDiv()
+{
+    constexpr size_t n = 5;
+    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
+    Point<n> p2 = { 6.0, 3.5, 4.3, 6.503, 20.3 };
+    double v1 = 302.55, v2 = 905.15;
+    PointVal<n> f1{ p1,v1 };
+    PointVal<n> f2{ p2,v2 };
+    PointVal<n> f3 = f1 / f2;
+    std::cout << '\n' << f1 << '\n' << "/\n" << f2 << '\n'
+        << "result:\n" << f3 << '\n';
+}
+
+void Tests::Pointvalsqrt()
+{
+    constexpr size_t n = 5;
+    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
+    double v1 = 302.55;
+    PointVal<n> f1{ p1,v1 };
+    PointVal<n> f2 = sqrt(f1);
+    std::cout << '\n' << "sqrt(" << f1 << ")\n" << f2 << '\n';
+}
+
+void Tests::Pointvalabs()
+{
+    constexpr size_t n = 5;
+    Point<n> p1 = { -5.9, 3.0, -4.4, 4.503, 10.3 };
+    double v1 = 302.55;
+    PointVal<n> f1{ p1,v1 };
+    PointVal<n> f2 = abs(f1);
+    std::cout << '\n' << "abs(" << f1 << ")\n" << f2 << '\n';
+}
