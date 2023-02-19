@@ -1,0 +1,25 @@
+#pragma once
+#include <iostream>
+#include "Simplex.h"
+#include "SimplexStream.h"
+using namespace OptLib;
+namespace Tests
+{
+    //point
+    void test1();   //p1+p2
+    void test2();   //p1-p2
+    void test3();   //p1+x
+    void test4();   //p1-x
+    void test5();   //p1*p2
+    void test6();   //p1 / p2
+    void test7();   //p1*x
+    void test8();   //p1 / x
+    void test9();   //p1 || p2
+    void test10();  //sqrt p1
+    void test11();  //abs p1
+
+    //PointVal
+    void PointvalPlus();
+    void PointValMinus();
+}
+

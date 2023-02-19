@@ -1,21 +1,20 @@
-#include <array>
-#include <algorithm>
+#pragma once
 #include <functional>
 #include <cmath>
-#pragma once
+#include "SimplexOps.h"
+
 namespace OptLib
 {
-	template<size_t dim>
-	using Point = std::array<double, dim>;	// Point<7> p; - точка в 7-мимерном пространстве
-
+	
+	//Binary ops Point
 	template<size_t dim>
 	Point<dim> operator+ (const Point<dim>& arr1,
 							const Point<dim>& arr2)
 	{
 		Point<dim> result;
-		std::transform(arr1.begin(), arr2.end(),
+		std::transform(arr1.begin(), arr1.end(),
 			arr2.begin(), result.begin(),
-			std::plus<>{});
+			SimplexOps::BinaryOps::plus<>{});
 		return result;
 	}
 
@@ -24,9 +23,9 @@ namespace OptLib
 		const Point<dim>& arr2)
 	{
 		Point<dim> result;
-		std::transform(arr1.begin(), arr2.end(),
+		std::transform(arr1.begin(), arr1.end(),
 			arr2.begin(), result.begin(),
-			std::minus<>{});
+			SimplexOps::BinaryOps::minus<>{});
 		return result;
 	}
 
@@ -35,9 +34,9 @@ namespace OptLib
 		const Point<dim>& arr2)
 	{
 		Point<dim> result;
-		std::transform(arr1.begin(), arr2.end(),
+		std::transform(arr1.begin(), arr1.end(),
 			arr2.begin(), result.begin(),
-			std::multiplies<>{});
+			SimplexOps::BinaryOps::multi<>{});
 		return result;
 	}
 
@@ -46,9 +45,9 @@ namespace OptLib
 		const Point<dim>& arr2)
 	{
 		Point<dim> result;
-		std::transform(arr1.begin(), arr2.end(),
+		std::transform(arr1.begin(), arr1.end(),
 			arr2.begin(), result.begin(),
-			std::divides<>{});
+			SimplexOps::BinaryOps::div<>{});
 		return result;
 	}
 
@@ -64,67 +63,138 @@ namespace OptLib
 		return false;
 	}
 
-	template<size_t dim>
-	Point<dim> operator- (const Point<dim>& arr)
-	{
-		Point<dim> result;
-		for (size_t i = 0; i < dim-1; i++)
-		{
-			result[i] = -arr[i];
-		}
-		return result;
-	}
 
+
+	//UnaryOps Point
 	template<size_t dim>
-	Point<dim> operator+ (const Point<dim>& arr, const double& val) {
+	Point<dim> operator+ (const Point<dim>& arr, double val) {
 		Point<dim> result;
-		for (size_t i = 0; i < dim-1; i++)
-		{
-			result[i] = arr[i] + val;
-		}
+		std::transform(arr.begin(), arr.end(), result.begin(),
+			SimplexOps::UnaryOps::plus<double>{val});
 		return result;
 	}
 
 	template<size_t dim>
 	Point<dim> operator- (const Point<dim>& arr, const double& val) {
 		Point<dim> result;
-		for (size_t i = 0; i < dim - 1; i++)
-		{
-			result[i] = arr[i] - val;
-		}
+		std::transform(arr.begin(), arr.end(), result.begin(),
+			SimplexOps::UnaryOps::minus<double>{val});
 		return result;
 	}
 
 	template<size_t dim>
 	Point<dim> operator* (const Point<dim>& arr, const double& val) {
 		Point<dim> result;
-		for (size_t i = 0; i < dim - 1; i++)
-		{
-			result[i] = arr[i] * val;
-		}
+		std::transform(arr.begin(), arr.end(), result.begin(),
+			SimplexOps::UnaryOps::mult<double>{val});
 		return result;
+	}
+	template<size_t dim>
+	Point<dim> operator* (const double& val, const Point<dim>& arr) {
+		return arr * val;
 	}
 
 	template<size_t dim>
 	Point<dim> operator/ (const Point<dim>& arr, const double& val) {
 		Point<dim> result;
-		for (size_t i = 0; i < dim - 1; i++)
-		{
-			result[i] = arr[i] / val;
-		}
+		std::transform(arr.begin(), arr.end(), result.begin(),
+			SimplexOps::UnaryOps::div<double>{val});
 		return result;
 	}
 
 	template<size_t dim>
 	Point<dim> sqrt (const Point<dim>& arr) {
 		Point<dim> result;
-		for (size_t i = 0; i < dim - 1; i++)
-		{
-			result[i] = std::sqrt(arr[i]);
-		}
+		std::transform(arr.begin(), arr.end(), result.begin(),
+			SimplexOps::UnaryOps::sqrt{});
 		return result;
 	}
-}
+
+	template<size_t dim>
+	Point<dim> abs(const Point<dim>& arr) {
+		Point<dim> result;
+		std::transform(arr.begin(), arr.end(), result.begin(),
+			SimplexOps::UnaryOps::abs{});
+		return result;
+	}
+
+
+
+	template<size_t dim>
+	struct RawPoint
+	{
+		RawPoint() = default;
+
+		Point<dim> p;
+
+		RawPoint(const Point<dim>& p) noexcept :
+			p{ p } {}
+
+		RawPoint(Point<dim>&& p) :
+			p{ std::move(p) } {}
+
+		double operator[] (size_t i) const
+		{
+			return p[i];
+		}
+
+		operator Point<dim>()	//оператор неявного приведения
+		{
+			return p;
+		}
+	};
+
+
+
+	template<size_t dim>
+	struct PointVal :public RawPoint<dim>
+	{
+		double val;
+		PointVal() = default;	//PointVal(const PointVal &p) = default
+
+		PointVal(Point<dim>&& p, double val) :
+			RawPoint<dim>{ std::move(p) }, val{ val }{};
+
+		PointVal(const Point<dim>& p, double val) :
+			RawPoint<dim>{ p }, val{ val }{};
+
+		template<size_t dim>
+		bool operator < (const Point<dim>& rhs)
+		{
+			return this->val < rhs.val;
+		}
+
+		template<size_t dim>
+		bool operator > (const Point<dim>& rhs)
+		{
+			return this->val < rhs.val;
+		}
+
+		template<size_t dim>
+		bool operator ==(const Point<dim>& rhs)
+		{
+			return this->val == rhs.val;
+		}
+
+	};
+
+	//POINTVALUE OPERATIONS
+	
+	template<size_t dim>
+	PointVal<dim> operator+ (const PointVal<dim>& p1, const PointVal<dim>& p2)
+	{
+		PointVal<dim> res{ p1.p + p2.p, p1.val + p2.val };
+		return res;
+	}
+
+	template<size_t dim>
+	PointVal<dim> operator- (const PointVal<dim>& p1, const PointVal<dim>& p2)
+	{
+		PointVal<dim> res{ p1.p - p2.p, p1.val - p2.val };
+		return res;
+	}
+
+}//Optlib
 /*
 	Print: x,a
 	f(x1), f(x2)
@@ -133,5 +203,11 @@ namespace OptLib
 	дз:
 	Написать корень, +, -, *,/,||,
 		на число +, -, *,/,
+	New
+		x+-double
+		p1+-p2
+		p,x /* double
+
+	T(const T&) — конструктор копирования
 */
 
