@@ -164,8 +164,56 @@ void Tests::Pointvalabs()
 {
     constexpr size_t n = 5;
     Point<n> p1 = { -5.9, 3.0, -4.4, 4.503, 10.3 };
-    double v1 = 302.55;
+    double v1 = -302.55;
     PointVal<n> f1{ p1,v1 };
     PointVal<n> f2 = abs(f1);
     std::cout << '\n' << "abs(" << f1 << ")\n" << f2 << '\n';
+}
+
+void Tests::PointvalPlusScal()
+{
+    double x = 5.5;
+    constexpr size_t n = 5;
+    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
+    double v1 = -302.55;
+    PointVal<n> f1{ p1,v1 };
+    PointVal<n> f2 = f1 + x;
+    std::cout << '\n' << f1 << '\n' << "+\n" << x << '\n'
+        << "result:\n" << f2 << '\n';
+}
+
+void Tests::PointvalMinusScal()
+{
+    double x = 5.5;
+    constexpr size_t n = 5;
+    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
+    double v1 = -302.55;
+    PointVal<n> f1{ p1,v1 };
+    PointVal<n> f2 = f1 - x;
+    std::cout << '\n' << f1 << '\n' << "-\n" << x << '\n'
+        << "result:\n" << f2 << '\n';
+}
+
+void Tests::PointvalMultScal()
+{
+    double x = 5.5;
+    constexpr size_t n = 5;
+    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
+    double v1 = -302.55;
+    PointVal<n> f1{ p1,v1 };
+    PointVal<n> f2 = f1 * x;
+    std::cout << '\n' << f1 << '\n' << "*\n" << x << '\n'
+        << "result:\n" << f2 << '\n';
+}
+
+void Tests::PointvalDivScal()
+{
+    double x = 5.5;
+    constexpr size_t n = 5;
+    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
+    double v1 = -302.55;
+    PointVal<n> f1{ p1,v1 };
+    PointVal<n> f2 = f1 / x;
+    std::cout << '\n' << f1 << '\n' << "/\n" << x << '\n'
+        << "result:\n" << f2 << '\n';
 }

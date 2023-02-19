@@ -23,4 +23,9 @@ int main()
     Tests::PointvalDiv();
     Tests::Pointvalsqrt();
     Tests::Pointvalabs();
+    Tests::PointvalPlusScal();
+    Tests::PointvalMinusScal();
+    Tests::PointvalMultScal();
+    Tests::PointvalDivScal();
+
 }

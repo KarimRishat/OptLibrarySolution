@@ -222,6 +222,37 @@ namespace OptLib
 		return res;
 	}
 
+
+	template<size_t dim>
+	PointVal<dim> operator+ (const PointVal<dim>& p1, const double& Scalar)
+	{
+		PointVal<dim> res{ p1.p + Scalar, p1.val };
+		return res;
+	}
+
+
+	template<size_t dim>
+	PointVal<dim> operator- (const PointVal<dim>& p1, const double& Scalar)
+	{
+		PointVal<dim> res{ p1.p - Scalar, p1.val };
+		return res;
+	}
+
+
+	template<size_t dim>
+	PointVal<dim> operator* (const PointVal<dim>& p1, const double& Scalar)
+	{
+		PointVal<dim> res{ p1.p * Scalar, p1.val };
+		return res;
+	}
+
+	template<size_t dim>
+	PointVal<dim> operator/ (const PointVal<dim>& p1, const double& Scalar)
+	{
+		PointVal<dim> res{ p1.p / Scalar, p1.val };
+		return res;
+	}
+
 }//Optlib
 /*
 	Print: x,a

@@ -25,5 +25,9 @@ namespace Tests
     void PointvalDiv();
     void Pointvalsqrt();
     void Pointvalabs();
+    void PointvalPlusScal();
+    void PointvalMinusScal();
+    void PointvalMultScal();
+    void PointvalDivScal();
 }
 
