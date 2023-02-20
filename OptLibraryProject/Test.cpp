@@ -98,6 +98,15 @@ void Tests::test11()
     std::cout << '\n' << "abs(" << p1 << ")\n" << p2 << '\n';
 }
 
+void Tests::testDotProd()
+{
+    constexpr size_t n = 2;
+    Point<n> p1 = { 5.0, 3.0};
+    Point<n> p2 = { 6.0, 3.5};
+    double res = DotProd(p1, p2);
+    std::cout << "\n SCALAR PROIZVEDENIE\n" << res;
+}
+
 void Tests::PointvalPlus()
 {
     constexpr size_t n = 5;
@@ -216,4 +225,17 @@ void Tests::PointvalDivScal()
     PointVal<n> f2 = f1 / x;
     std::cout << '\n' << f1 << '\n' << "/\n" << x << '\n'
         << "result:\n" << f2 << '\n';
+}
+
+void Tests::SetOfPoints()
+{
+    constexpr size_t n = 5;
+    Point<n> p1 = { 1, 2, 3, 4, 5 };
+    Point<n> p2 = { 6, 7, 8, 9, 10 };
+    Point<n> p3 = { 1, 2, 3, 5, 3 };
+    Point<n> p4 = { 1, 2, 3, 5, 3 };
+    Point<n> p5 = { 1, 2, 3, 5, 3 };
+    OptLib::SetOfPoints<n,Point<n>> set1 = { p1, p2, p3, p4, p5 };
+    OptLib::SetOfPoints<n, Point<n>> set2 = { p2, p1, p5, p4, p3 };
+    std::cout << '\n' << set1 * set2;
 }

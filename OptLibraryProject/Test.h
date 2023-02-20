@@ -17,6 +17,7 @@ namespace Tests
     void test9();   //p1 || p2
     void test10();  //sqrt p1
     void test11();  //abs p1
+    void testDotProd();  //dotprod
 
     //PointVal
     void PointvalPlus();
@@ -29,5 +30,8 @@ namespace Tests
     void PointvalMinusScal();
     void PointvalMultScal();
     void PointvalDivScal();
+
+    //SetOfPoints
+    void SetOfPoints();
 }
 

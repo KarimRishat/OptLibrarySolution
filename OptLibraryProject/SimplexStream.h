@@ -25,3 +25,13 @@ Stream& operator << (Stream& o, const OptLib::PointVal<dim>& p)
 	o << ")\tf(x) = "<<p.val;
 	return o;
 }
+
+template <class Stream, size_t count, typename point>
+Stream& operator<< (Stream& os, const SetOfPoints<count, point>& p) {
+	os << "[ ";
+	for (const auto& x : p) {
+		os << x << "\n";
+	}
+	os << "]";
+	return os;
+}

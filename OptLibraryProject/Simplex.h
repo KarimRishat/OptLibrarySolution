@@ -119,6 +119,29 @@ namespace OptLib
 		return result;
 	}
 
+	template<class T>
+	double DotProd(T& p1, T& p2)
+	{
+		T p3 = p1 * p2;
+		double res = 0.0;
+		for (size_t i = 0; i < p3.size(); i++)
+		{
+			res += p3[i];
+		}
+		return res;
+	}
+
+
+	/*template<size_t dim>
+	double DotProd(Point<dim>& p1, Point<dim> p2)
+	{
+		Point<dim> p3 = p1 * p2;
+		double res = 0.0;
+		std::transform(p1.begin(), p1.end(), p2.begin(),
+			res, SimplexOps::BinaryOps::DotProd{ res });
+		return res;
+	}*/
+
 
 
 	template<size_t dim>
@@ -189,6 +212,7 @@ namespace OptLib
 		return res;
 	}
 
+
 	template<size_t dim>
 	PointVal<dim> operator- (const PointVal<dim>& p1, const PointVal<dim>& p2)
 	{
@@ -196,12 +220,14 @@ namespace OptLib
 		return res;
 	}
 
+
 	template<size_t dim>
 	PointVal<dim> operator* (const PointVal<dim>& p1, const PointVal<dim>& p2)
 	{
 		PointVal<dim> res{ p1.p * p2.p, p1.val * p2.val };
 		return res;
 	}
+
 
 	template<size_t dim>
 	PointVal<dim> operator/ (const PointVal<dim>& p1, const PointVal<dim>& p2)
@@ -280,6 +306,34 @@ namespace OptLib
 		PointVal<dim> res{ Scalar / p1.p , p1.val };
 		return res;
 	}
+
+
+
+	/*20.02.2023 SET OF POINTS*/
+
+	template<size_t count, typename point>
+	using SetOfPoints = std::array<point, count>;
+	//SetOfpoints<5,Points<3>> sop
+	/*template<size_t count, typename point>
+	SetOfPoints<count,point> operator * (SetOfPoints<count,point> set1,
+		SetOfPoints<count,point> set2)
+	{
+		SetOfPoints<count, point> res;
+		
+		return res;
+	}*/
+
+	template <size_t count, typename point>
+	SetOfPoints<count, point> operator* (const SetOfPoints<count, point>& A, 
+		const SetOfPoints<count, point>& B) {
+		SetOfPoints<count, point> C;
+		std::transform(A.begin(), A.end(), B.begin(), C.begin(),
+			[](const point& a, const point& b) {return DotProd(a,b);});
+		return C;
+	}
+
+
+
 
 }//Optlib
 /*

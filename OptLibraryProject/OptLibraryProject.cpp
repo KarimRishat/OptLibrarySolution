@@ -16,6 +16,7 @@ int main()
     Tests::test9();
     Tests::test10();
     Tests::test11();
+    Tests::testDotProd();
     std::cout <<'\n' << '\t' << "POINT VAL\n";
     Tests::PointvalPlus();
     Tests::PointValMinus();
@@ -27,5 +28,6 @@ int main()
     Tests::PointvalMinusScal();
     Tests::PointvalMultScal();
     Tests::PointvalDivScal();
+    Tests::SetOfPoints();
 
 }

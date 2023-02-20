@@ -113,6 +113,20 @@ namespace OptLib
 
 			template <class T = void>
 			using div = std::divides<T>;
+
+			struct DotProd
+			{
+			protected:
+				double res;
+			public:
+				DotProd(double val) :
+					res{ val } {};
+				template<class T = double>
+				constexpr T operator() (const T& lhs, const T& rhs)
+				{
+					return lhs * rhs + res;
+				}
+			};
 		}
 	}
 }
