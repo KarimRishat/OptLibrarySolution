@@ -5,7 +5,7 @@
 
 int main()
 {
-    Tests::test1();
+    /*Tests::test1();
     Tests::test2();
     Tests::test3();
     Tests::test4();
@@ -27,7 +27,8 @@ int main()
     Tests::PointvalPlusScal();
     Tests::PointvalMinusScal();
     Tests::PointvalMultScal();
-    Tests::PointvalDivScal();
+    Tests::PointvalDivScal();*/
     Tests::SetOfPoints();
+    Tests::SetOfPointsMult();
 
 }

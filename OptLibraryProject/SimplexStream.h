@@ -27,11 +27,11 @@ Stream& operator << (Stream& o, const OptLib::PointVal<dim>& p)
 }
 
 template <class Stream, size_t count, typename point>
-Stream& operator<< (Stream& os, const SetOfPoints<count, point>& p) {
-	os << "[ ";
+Stream& operator<< (Stream& os, const OptLib::SetOfPoints<count, point>& p) {
+	
 	for (const auto& x : p) {
 		os << x << "\n";
 	}
-	os << "]";
+	
 	return os;
 }

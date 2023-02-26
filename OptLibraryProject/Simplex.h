@@ -119,15 +119,14 @@ namespace OptLib
 		return result;
 	}
 
-	template<class T>
-	double DotProd(T& p1, T& p2)
+	template<size_t dim>
+	double DotProd(const Point<dim>& p1,const Point<dim>& p2)
 	{
-		T p3 = p1 * p2;
-		double res = 0.0;
-		for (size_t i = 0; i < p3.size(); i++)
-		{
-			res += p3[i];
-		}
+		Point<dim> result;
+		double res = 0;
+		std::transform(p1.begin(), p1.end(), p2.begin(), result.begin(), std::multiplies<>{});
+		for (auto& el : result)
+			res += el;
 		return res;
 	}
 
@@ -202,6 +201,9 @@ namespace OptLib
 		}
 
 	};
+
+
+
 
 	//POINTVALUE OPERATIONS
 	
@@ -314,23 +316,61 @@ namespace OptLib
 	template<size_t count, typename point>
 	using SetOfPoints = std::array<point, count>;
 	//SetOfpoints<5,Points<3>> sop
-	/*template<size_t count, typename point>
-	SetOfPoints<count,point> operator * (SetOfPoints<count,point> set1,
-		SetOfPoints<count,point> set2)
+
+	//TRANS
+	template<size_t count, typename point>
+	SetOfPoints<count, point> Tr(const SetOfPoints<count, point>& rhs)
+	{
+		SetOfPoints<count, point> Res;
+
+		for (size_t i = 0; i < count; i++)
+		{
+			for (size_t j = 0; j < count; j++)//дл€ квадратных
+			{
+				Res[i][j] = rhs[j][i];
+			}
+
+		}
+		return Res;
+	}
+
+	//Multiply with point
+	template<size_t count, typename point>
+	point operator*(const SetOfPoints<count, point>& rhs, const point& lhs)
+	{
+		point res;
+		for (size_t i = 0; i < count; i++)
+		{
+			res[i] = DotProd(rhs[i], lhs);
+		}
+
+		return res;
+	}
+
+	template<size_t count, typename point>
+	SetOfPoints<count,point> operator * (const SetOfPoints<count,point> set1,
+		const SetOfPoints<count,point> set2)
 	{
 		SetOfPoints<count, point> res;
-		
-		return res;
-	}*/
+		SetOfPoints<count, point> Trans = Tr(set2);
+		for (size_t i = 0; i < count; i++)
+		{
+			res[i] = set1 * Trans[i];
+		}
+		return Tr(res);
+	}
 
-	template <size_t count, typename point>
+
+	//”множение через —кал€рное произведение
+
+	/*template <size_t count, typename point>
 	SetOfPoints<count, point> operator* (const SetOfPoints<count, point>& A, 
 		const SetOfPoints<count, point>& B) {
 		SetOfPoints<count, point> C;
 		std::transform(A.begin(), A.end(), B.begin(), C.begin(),
 			[](const point& a, const point& b) {return DotProd(a,b);});
 		return C;
-	}
+	}*/
 
 
 

@@ -233,9 +233,22 @@ void Tests::SetOfPoints()
     Point<n> p1 = { 1, 2, 3, 4, 5 };
     Point<n> p2 = { 6, 7, 8, 9, 10 };
     Point<n> p3 = { 1, 2, 3, 5, 3 };
-    Point<n> p4 = { 1, 2, 3, 5, 3 };
-    Point<n> p5 = { 1, 2, 3, 5, 3 };
+    Point<n> p4 = { 1, 1, 2, 1, 3 };
+    Point<n> p5 = { 1, 2, 2, 15, 10 };
     OptLib::SetOfPoints<n,Point<n>> set1 = { p1, p2, p3, p4, p5 };
+    OptLib::SetOfPoints<n, Point<n>> set2 = { p2, p1, p5, p4, p3 };
+    std::cout << '\n' << set1 <<'\n'<< set2;
+}
+
+void Tests::SetOfPointsMult()
+{
+    constexpr size_t n = 5;
+    Point<n> p1 = { 1, 2, 3, 4, 5 };
+    Point<n> p2 = { 6, 7, 8, 9, 10 };
+    Point<n> p3 = { 1, 2, 3, 5, 3 };
+    Point<n> p4 = { 1, 1, 2, 1, 3 };
+    Point<n> p5 = { 1, 2, 2, 15, 10 };
+    OptLib::SetOfPoints<n, Point<n>> set1 = { p1, p2, p3, p4, p5 };
     OptLib::SetOfPoints<n, Point<n>> set2 = { p2, p1, p5, p4, p3 };
     std::cout << '\n' << set1 * set2;
 }
