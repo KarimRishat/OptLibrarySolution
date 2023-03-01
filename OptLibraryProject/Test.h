@@ -34,5 +34,8 @@ namespace Tests
     //SetOfPoints
     void SetOfPoints();
     void SetOfPointsMult();
+
+    void MeanTest();
+    void DispTest();
 }
 

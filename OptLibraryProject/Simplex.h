@@ -1,6 +1,9 @@
 #pragma once
 #include <functional>
 #include <cmath>
+#include <vector>
+#include <cassert>
+#include <array>
 #include "SimplexOps.h"
 
 namespace OptLib
@@ -334,6 +337,26 @@ namespace OptLib
 		return Res;
 	}
 
+
+	//TRANS FOR RECTANGLE MATRIX
+	/*static constexpr size_t Dim = dim;*/
+
+	//template<size_t count, typename point>
+	//auto Tr(const SetOfPoints<count, point>& rhs)
+	//{
+	//	SetOfPoints<count, point> Res;
+
+	//	for (size_t i = 0; i < count; i++)
+	//	{
+	//		for (size_t j = 0; j < count; j++)//для квадратных
+	//		{
+	//			Res[i][j] = rhs[j][i];
+	//		}
+
+	//	}
+	//	return Res;
+	//}
+
 	//Multiply with point
 	template<size_t count, typename point>
 	point operator*(const SetOfPoints<count, point>& rhs, const point& lhs)
@@ -372,6 +395,103 @@ namespace OptLib
 		return C;
 	}*/
 
+
+
+
+	//27.02
+
+
+	/*template<class T>
+	class MyClass
+	{
+	public:
+		MyClass();
+		~MyClass();
+		using my_type = T;
+		std::vector<my_type> its_size;
+
+
+	private:
+
+	};*/
+
+	
+
+	template<size_t count, typename point>
+	class RawSetOfPoints
+	{
+	protected:
+		SetOfPoints<count, point> ItsSetOfPoints;
+	public:
+		RawSetOfPoints() = default;
+		RawSetOfPoints(SetOfPoints<count, point>&& s) :
+			ItsSetOfPoints{ std::move(s) } {}	//moving construct
+		RawSetOfPoints(const SetOfPoints<count, point>& sop) :
+			ItsSetOfPoints{ sop } {}
+		const point& operator [](size_t i)
+		{
+			assert(i < count);
+			return ItsSetOfPoints[i];
+		}
+
+		point Mean() const
+		{
+			point out{ ItsSetOfPoints[0] };
+			if constexpr (count > 1)
+			for (size_t i = 1; i < count; i++)
+			{
+				out = out + ItsSetOfPoints[i];
+			}
+			out = out / count;
+			return out;
+		}
+
+
+		point Variance() const	//дисперсия
+		{
+			
+			point out{0.0};
+			if constexpr (count > 1) {
+				point mean = Mean();
+				for (size_t i = 0; i < count; i++)
+				{
+					out = out + (ItsSetOfPoints[i] - mean) * (ItsSetOfPoints[i] - mean);
+				}
+				out = out / count;
+			}
+			return out;
+		}
+
+
+		
+	
+	};
+
+
+	template<size_t count, typename point, typename PointVal>
+	class SetOfPointsVal : public RawSetOfPoints<count, PointVal>
+	{
+	public: 
+		SetOfPointsVal() = default;
+		SetOfPointsVal(SetOfPoints<count, PointVal>&& s) :
+			RawSetOfPoints<count,PointVal>{ std::move(s) } {}	//moving construct
+		//Smth smth
+		static SetOfPoints<count, PointVal> 
+			make_field(SetOfPoints<count, point>&& s,
+				std::array<double, count>&& vals)
+		{
+			SetOfPoints<count, PointVal> P;
+			for (size_t i = 0; i < length; i++)
+			{
+				P[i] = PointVal{ s[i],vals[i] };
+			}
+			return P;
+		}
+		SetOfPointsVal(std::array<double, count>&& vals) {
+			return make_field(vals);
+		}
+	};
+	
 
 
 

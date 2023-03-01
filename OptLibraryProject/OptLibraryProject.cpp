@@ -28,7 +28,9 @@ int main()
     Tests::PointvalMinusScal();
     Tests::PointvalMultScal();
     Tests::PointvalDivScal();*/
-    Tests::SetOfPoints();
-    Tests::SetOfPointsMult();
+    /*Tests::SetOfPoints();
+    Tests::SetOfPointsMult();*/
+    Tests::MeanTest();
+    Tests::DispTest();
 
 }
