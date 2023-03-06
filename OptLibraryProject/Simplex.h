@@ -420,9 +420,10 @@ namespace OptLib
 	template<size_t count, typename point>
 	class RawSetOfPoints
 	{
-	protected:
-		SetOfPoints<count, point> ItsSetOfPoints;
+	/*protected:
+		SetOfPoints<count, point> ItsSetOfPoints;*/
 	public:
+		SetOfPoints<count, point> ItsSetOfPoints;
 		RawSetOfPoints() = default;
 		RawSetOfPoints(SetOfPoints<count, point>&& s) :
 			ItsSetOfPoints{ std::move(s) } {}	//moving construct
@@ -468,30 +469,69 @@ namespace OptLib
 	};
 
 
-	template<size_t count, typename point, typename PointVal>
-	class SetOfPointsVal : public RawSetOfPoints<count, PointVal>
+	template<size_t count, typename point, typename pointVal>
+	class SetOfPointsVal : public RawSetOfPoints<count, pointVal>
 	{
-	public: 
-		SetOfPointsVal() = default;
-		SetOfPointsVal(SetOfPoints<count, PointVal>&& s) :
-			RawSetOfPoints<count,PointVal>{ std::move(s) } {}	//moving construct
-		//Smth smth
-		static SetOfPoints<count, PointVal> 
+
+	public:
+		static SetOfPoints<count, pointVal>
 			make_field(SetOfPoints<count, point>&& s,
 				std::array<double, count>&& vals)
 		{
-			SetOfPoints<count, PointVal> P;
-			for (size_t i = 0; i < length; i++)
+			SetOfPoints<count, pointVal> P;
+			for (size_t i = 0; i < count; i++)
 			{
-				P[i] = PointVal{ s[i],vals[i] };
+				P[i] = pointVal{ s[i],vals[i] };
 			}
 			return P;
+			
 		}
+		/*const pointVal& operator [](size_t i) const
+		{
+			assert(i < count);
+			return ItsSetOfPoints[i];
+		}*/
+		
+	 
+		SetOfPointsVal() = default;
+
+		SetOfPointsVal(SetOfPoints<count, pointVal>&& s) :
+			RawSetOfPoints<count,pointVal>{ std::move(s) } {}	//moving construct
+
+
+		SetOfPointsVal(SetOfPoints<count, point>&& s,
+			std::array<double,count>&&Pval) :SetOfPointsVal<count,point,
+			pointVal>{std::move(make_field(std::move(s),std::move(Pval)))}{}
+
+			
 		SetOfPointsVal(std::array<double, count>&& vals) {
 			return make_field(vals);
 		}
 	};
 	
+
+
+
+	/*template<size_t count, typename point, typename pointval>
+	class SetOfPointsValSort:
+		public SetOfPointsVal<count, point, pointval>
+	{
+
+	private:
+		void Sort() {
+			std::sort();
+		}
+	public:
+		SetOfPointsValSort(SetOfPointsVal<count,pointval>&& s):
+			SetOfPointsVal<count, pointval>{std::move(s)}
+		{
+			this->Sort();
+		}
+
+		SetOfPointsValSort(SetOfPoints<count,point>&& s, 
+			std::array<double,count>&& vals):
+			SetOfPointsVal<count, point, pointval>{} {}
+	};*/
 
 
 

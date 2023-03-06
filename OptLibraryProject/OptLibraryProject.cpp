@@ -30,7 +30,7 @@ int main()
     Tests::PointvalDivScal();*/
     /*Tests::SetOfPoints();
     Tests::SetOfPointsMult();*/
-    Tests::MeanTest();
-    Tests::DispTest();
-
+    /*Tests::MeanTest();
+    Tests::DispTest();*/
+    Tests::SOPVAL2();
 }

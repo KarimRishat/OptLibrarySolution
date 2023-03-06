@@ -37,5 +37,9 @@ namespace Tests
 
     void MeanTest();
     void DispTest();
+
+    //SetOfPointsVal
+    void SOPVAL();
+    void SOPVAL2();
 }
 
