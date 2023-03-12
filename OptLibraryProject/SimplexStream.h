@@ -37,15 +37,13 @@ Stream& operator<< (Stream& os, const OptLib::SetOfPoints<count, point>& p) {
 }
 
 
-//template <class Stream, size_t count, typename point, typename PointVal>
-//Stream& operator<< (Stream& os, const OptLib::SetOfPointsVal<count, point, PointVal>& SOPV) {
-//
-//	for (const auto& x : SOPV) {
-//		os << x << "\n";
-//	}
-//
-//	return os;
-//}
+template <class Stream, size_t count, typename point, typename PointVal>
+Stream& operator<< (Stream& os, const OptLib::SetOfPointsVal<count, point, PointVal>& SOPV) {
+
+	os << SOPV.ItsSetOfPoints;
+
+	return os;
+}
 
 
 //template <class Stream, size_t count, typename point, typename pointVal>

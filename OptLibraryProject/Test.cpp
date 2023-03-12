@@ -317,7 +317,7 @@ void Tests::SOPVAL2()
     std::array<double, n>&& vals{ 0.5, 0.4,0.3,0.2,0.1 };
     OptLib::SetOfPoints<n, Point<n>> set1 = { p1, p2, p3, p4, p5 };
     OptLib::SetOfPointsVal<n, Point<n>, PointVal<n>> SOPV{ std::move(set1), std::move(vals) };
-   // std::cout << '\n' << "SetOfPointsVal:\n" << SOPV << '\n';
+    std::cout << '\n' << "SetOfPointsVal:\n" << SOPV << '\n';
 }
 
 
