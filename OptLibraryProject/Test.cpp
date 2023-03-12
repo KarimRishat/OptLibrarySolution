@@ -279,32 +279,30 @@ void Tests::DispTest()
     std::cout <<"Variance:\n"<< res;
 }
 
-//void Tests::SOPVAL()
-//{
-//    /*constexpr size_t n = 5;
-//    Point<n> p1 = { 1, 2, 3, 4, 5 };
-//    Point<n> p2 = { 6, 7, 8, 9, 10 };
-//    Point<n> p3 = { 1, 2, 3, 5, 3 };
-//    Point<n> p4 = { 1, 1, 2, 1, 3 };
-//    Point<n> p5 = { 1, 2, 2, 15, 10 };*/
-//    constexpr size_t n = 5;
-//    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
-//    Point<n> p2 = { 6.0, 3.5, 4.3, 6.503, 20.3 };
-//    Point<n> p3 = { 1, 2, 3, 5, 3 };
-//    Point<n> p4 = { 1, 1, 2, 1, 3 };
-//    Point<n> p5 = { 1, 2, 2, 15, 10 };
-//    double v1 = 302.55, v2 = 905.15, v3 = 0.15, v4 = 1.5, v5 = 0.9;
-//    PointVal<n> f1{ p1,v1 };
-//    PointVal<n> f2{ p2,v2 };
-//    PointVal<n> f3{ p3,v3 };
-//    PointVal<n> f4{ p4,v4 };
-//    PointVal<n> f5{ p5,v5 };
-//    OptLib::SetOfPoints<n, PointVal<n>> set1 = { f1, f2, f3, f4, f5 };
-//    //std::array<double, n>&& vals{ 0.5, 0.4,0.3,0.2,0.1 };
-//    /*OptLib::SetOfPointsVal<n, Point<n>, PointVal<n>> SOPV{ vals };*/
-//    OptLib::SetOfPointsVal<n, Point<n>, PointVal<n>> SOPV{ set1 };
-//    std::cout << '\n' <<"SetOfPointsVal:\n" << SOPV << '\n';
-//}
+void Tests::SOPVAL()
+{
+    /*constexpr size_t n = 5;
+    Point<n> p1 = { 1, 2, 3, 4, 5 };
+    Point<n> p2 = { 6, 7, 8, 9, 10 };
+    Point<n> p3 = { 1, 2, 3, 5, 3 };
+    Point<n> p4 = { 1, 1, 2, 1, 3 };
+    Point<n> p5 = { 1, 2, 2, 15, 10 };*/
+    constexpr size_t n = 5;
+    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
+    Point<n> p2 = { 6.0, 3.5, 4.3, 6.503, 20.3 };
+    Point<n> p3 = { 1, 2, 3, 5, 3 };
+    Point<n> p4 = { 1, 1, 2, 1, 3 };
+    Point<n> p5 = { 1, 2, 2, 15, 10 };
+    double v1 = 302.55, v2 = 905.15, v3 = 0.15, v4 = 1.5, v5 = 0.9;
+    PointVal<n> f1{ p1,v1 };
+    PointVal<n> f2{ p2,v2 };
+    PointVal<n> f3{ p3,v3 };
+    PointVal<n> f4{ p4,v4 };
+    PointVal<n> f5{ p5,v5 };
+    OptLib::SetOfPoints<n, PointVal<n>> set1 = { f1, f2, f3, f4, f5 };
+    OptLib::SetOfPointsVal<n, Point<n>, PointVal<n>> SOPV{ std::move(set1) };
+    std::cout << '\n' <<"SetOfPointsVal1:\n" << SOPV << '\n';
+}
 
 void Tests::SOPVAL2()
 {
@@ -317,7 +315,21 @@ void Tests::SOPVAL2()
     std::array<double, n>&& vals{ 0.5, 0.4,0.3,0.2,0.1 };
     OptLib::SetOfPoints<n, Point<n>> set1 = { p1, p2, p3, p4, p5 };
     OptLib::SetOfPointsVal<n, Point<n>, PointVal<n>> SOPV{ std::move(set1), std::move(vals) };
-    std::cout << '\n' << "SetOfPointsVal:\n" << SOPV << '\n';
+    std::cout << '\n' << "SetOfPointsVal2:\n" << SOPV << '\n';
+}
+
+void Tests::SortSopv()
+{
+    constexpr size_t n = 5;
+    Point<n> p1 = { 5.9, 3.0, 4.4, 4.503, 10.3 };
+    Point<n> p2 = { 6.0, 3.5, 4.3, 6.503, 20.3 };
+    Point<n> p3 = { 1, 2, 3, 5, 3 };
+    Point<n> p4 = { 1, 1, 2, 1, 3 };
+    Point<n> p5 = { 1, 2, 2, 15, 10 };
+    std::array<double, n>&& vals{ 1.5, 2.4,0.3,0.02,0.189 };
+    OptLib::SetOfPoints<n, Point<n>> set1 = { p1, p2, p3, p4, p5 };
+    OptLib::SetOfPointsValSort<n, Point<n>, PointVal<n>> sortedSOPV{ std::move(set1),std::move(vals) };
+    std::cout << '\n' << "SetOfPointsVal2:\n" << sortedSOPV << '\n';
 }
 
 

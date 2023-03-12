@@ -41,5 +41,8 @@ namespace Tests
     //SetOfPointsVal
     void SOPVAL();
     void SOPVAL2();
+
+    //SortSOPV
+    void SortSopv();
 }
 

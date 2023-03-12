@@ -485,14 +485,9 @@ namespace OptLib
 			}
 			return P;
 			
+			
 		}
-		/*const pointVal& operator [](size_t i) const
-		{
-			assert(i < count);
-			return ItsSetOfPoints[i];
-		}*/
 		
-	 
 		SetOfPointsVal() = default;
 
 		SetOfPointsVal(SetOfPoints<count, pointVal>&& s) :
@@ -512,17 +507,21 @@ namespace OptLib
 
 
 
-	/*template<size_t count, typename point, typename pointval>
+	template<size_t count, typename point, typename pointval>
 	class SetOfPointsValSort:
 		public SetOfPointsVal<count, point, pointval>
 	{
-
+		
 	private:
 		void Sort() {
-			std::sort();
+			/*std::sort(std::begin(this->ItsSetOfPoints), std::end(this->ItsSetOfPoints));*/
+
+			std::sort(ItsSetOfPoints.begin(), ItsSetOfPoints.end());
+
 		}
 	public:
-		SetOfPointsValSort(SetOfPointsVal<count,pointval>&& s):
+
+		SetOfPointsValSort(SetOfPointsVal<count, point, pointval>&& s):
 			SetOfPointsVal<count, pointval>{std::move(s)}
 		{
 			this->Sort();
@@ -530,8 +529,11 @@ namespace OptLib
 
 		SetOfPointsValSort(SetOfPoints<count,point>&& s, 
 			std::array<double,count>&& vals):
-			SetOfPointsVal<count, point, pointval>{} {}
-	};*/
+			SetOfPointsVal<count, point, pointval>{std::move(s),std::move(vals)} 
+		{
+			this->Sort();
+		}
+	};
 
 
 

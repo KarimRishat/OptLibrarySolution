@@ -32,5 +32,7 @@ int main()
     Tests::SetOfPointsMult();*/
     /*Tests::MeanTest();
     Tests::DispTest();*/
+    Tests::SOPVAL();
     Tests::SOPVAL2();
+    Tests::SortSopv();
 }
