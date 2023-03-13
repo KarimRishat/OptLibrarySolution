@@ -146,6 +146,8 @@
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Func.h" />
+    <ClInclude Include="FuncInterface.h" />
     <ClInclude Include="Simplex.h" />
     <ClInclude Include="SimplexOps.h" />
     <ClInclude Include="SimplexStream.h" />
