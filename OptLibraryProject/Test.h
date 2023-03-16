@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Simplex.h"
 #include "SimplexStream.h"
+#include "Func.h"
 using namespace OptLib;
 namespace Tests
 {
@@ -44,5 +45,9 @@ namespace Tests
 
     //SortSOPV
     void SortSopv();
+
+
+    //Function
+    void Func1();
 }
 

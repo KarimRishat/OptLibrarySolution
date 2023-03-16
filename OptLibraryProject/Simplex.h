@@ -516,7 +516,7 @@ namespace OptLib
 		void Sort() {
 			/*std::sort(std::begin(this->ItsSetOfPoints), std::end(this->ItsSetOfPoints));*/
 
-			std::sort(ItsSetOfPoints.begin(), ItsSetOfPoints.end());
+			//std::sort(ItsSetOfPoints.begin(), ItsSetOfPoints.end());
 
 		}
 	public:

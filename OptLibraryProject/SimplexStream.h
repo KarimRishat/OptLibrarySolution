@@ -1,5 +1,6 @@
 #pragma once
 #include "Simplex.h"
+#include "FuncInterface.h"
 template<class Stream, size_t dim>
 Stream& operator << (Stream& o, const OptLib::Point<dim>& p)
 {
@@ -52,6 +53,8 @@ Stream& operator<< (Stream& os, const OptLib::SetOfPointsValSort<count, point, P
 
 	return os;
 }
+
+
 
 //template <class Stream, size_t count, typename point, typename pointVal>
 //Stream& operator<<(Stream& os, const OptLib::SetOfPointsVal<count, point, pointVal>& set) {

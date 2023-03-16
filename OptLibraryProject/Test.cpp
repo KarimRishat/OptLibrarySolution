@@ -332,4 +332,20 @@ void Tests::SortSopv()
     std::cout << '\n' << "SetOfPointsVal2:\n" << sortedSOPV << '\n';
 }
 
+void Tests::Func1()
+{
+    Point<1> p1{ 1.1 };
+    Point<2> p2{ 0.5, 0.6 };
+   
+    FuncInterface::IFunc<1>* f1 = new ConcreteFunc::sinus{};
+    FuncInterface::IFunc<2>* f2 = new ConcreteFunc::sinus2{} ;
+    double a = (*f1)(p1);
+    double b = (*f2)(p2);
+
+    
+  
+   std::cout <<p2<< b <<"\n"<<p1<<a;
+    
+}
+
 

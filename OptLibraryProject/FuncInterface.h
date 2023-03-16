@@ -84,8 +84,9 @@ namespace OptLib
 		};
 
 		template<size_t dim>
-		class sin : public IFuncWithHess<dim>
+		class Sin : public IFuncWithHess<dim>
 		{
+			//virtual double operator() (const Point<dim>& p) const = 0;
 		public:
 			/*double operator() (Point<dim> p) const override
 			{
@@ -105,21 +106,7 @@ namespace OptLib
 		};
 
 
-		template <size_t dim>
-		class paraboloid : public IFuncWithGrad
-		{};
-
-		template <size_t dim>
-		class plane : public IFuncWithGrad {};
 		
-
-		class Sin : public sin<1> {
-		public:
-			double operator() (Point<1> p) const override
-			{
-
-			}
-		};
 
 	}//FuncInterface
 }
