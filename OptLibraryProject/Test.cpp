@@ -339,13 +339,66 @@ void Tests::Func1()
    
     FuncInterface::IFunc<1>* f1 = new ConcreteFunc::sinus{};
     FuncInterface::IFunc<2>* f2 = new ConcreteFunc::sinus2{} ;
+
     double a = (*f1)(p1);
     double b = (*f2)(p2);
 
+    std::cout <<p2<< b <<"\n"<<p1<<a<<"grad";
     
-  
-   std::cout <<p2<< b <<"\n"<<p1<<a;
-    
+}
+
+void Tests::FuncGrad()
+{
+    Point<1> p1{ 1.5 };
+    Point<2> p2{ 0.5, 0.6 };
+
+    ConcreteFunc::sinus* sinus = new ConcreteFunc::sinus{};
+    ConcreteFunc::sinus2* sinus2 = new ConcreteFunc::sinus2{};
+    Point<1> grad1 = sinus->grad(p1);
+
+    std::cout <<"p1: "<< p1 << "\ngrad(p1):\n" << grad1 << "\np2:\n" <<
+        p2 << "\ngrad(p2):\n" << sinus2->grad(p2);
+}
+
+void Tests::FuncHess()
+{
+    Point<1> p1{ 1.5 };
+    Point<2> p2{ 0.5, 0.6 };
+
+    ConcreteFunc::sinus* sinus = new ConcreteFunc::sinus{};
+    ConcreteFunc::sinus2* sinus2 = new ConcreteFunc::sinus2{};
+    Point<1> grad1 = sinus->hess(p1);
+
+    std::cout << "\nHess:\np1: " << p1 << "\nhess(p1):\n" << grad1 << "\np2:\n" <<
+        p2 << "\nhess(p2):\n" << sinus2->hess(p2);
+}
+
+void Tests::FunParab()
+{
+    Point<1> p1{ 1.2 };
+    Point<2> p2{ 0.5, 0.6 };
+
+    FuncInterface::IFunc<1>* f1 = new ConcreteFunc::paraboloid<1>{};
+    FuncInterface::IFunc<2>* f2 = new ConcreteFunc::paraboloid<2>{};
+
+    double a = (*f1)(p1);
+    double b = (*f2)(p2);
+
+    std::cout << p1 <<'\n' << a << "\np2:\n" << p2 << '\n' << b;
+}
+
+void Tests::FunGrad()
+{
+    Point<1> p1{ 1.2 };
+    Point<2> p2{ 0.5, 0.6 };
+
+    ConcreteFunc::paraboloid<1>* par1 = new ConcreteFunc::paraboloid<1>{};
+    ConcreteFunc::paraboloid<2>* par2 = new ConcreteFunc::paraboloid<2>{};
+    Point<1> grad1 = par1->grad(p1);
+
+    std::cout << "\n\n\np1: " << p1 << "\ngrad(p1):\n" << grad1 << "\np2:\n" <<
+        p2 << "\ngrad(p2):\n" << par2->grad(p2);
+
 }
 
 

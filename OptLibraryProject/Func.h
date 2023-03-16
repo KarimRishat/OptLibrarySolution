@@ -10,7 +10,23 @@ namespace OptLib
 
 
 		template <size_t dim>
-		class paraboloid : public FuncInterface::IFuncWithGrad<dim>{};
+		class paraboloid : public FuncInterface::IFuncWithGrad<dim>{
+		public:
+
+			double operator() (const Point<dim>& p) const override
+			{
+				Point<dim> res = p * p;
+				return pointToDouble(res);
+			}
+
+
+			double operator() (const Point<dim>&p, SetOfPoints<)
+
+			Point<dim> grad(const Point<dim>& p) const override
+			{
+				return 2*p;
+			}
+		};
 
 		template <size_t dim>
 		class plane : public FuncInterface::IFuncWithGrad<dim> {};
@@ -46,14 +62,15 @@ namespace OptLib
 
 			Point<2> grad(const Point<2>& p) const override
 			{
-				return Point<2>{cos(p[0]+p[1])};
+				return Point<2>{cos(p[0]), std::cos(p[1])};
 			}
 
 			Point<2> hess(const Point<2>& p) const override
 			{
-				return Point<2>{sin(p[0] + p[1])};
+				return Point<2>{sin(p[0]), sin(p[1])};
 			}
 
 		};
+
 	}
 }

@@ -20,6 +20,15 @@ namespace OptLib
 			SimplexOps::BinaryOps::plus<>{});
 		return result;
 	}
+	
+	template<size_t dim>
+	double pointToDouble(const Point<dim>& p) {
+		double sum = 0;
+		for (size_t i = 0; i < dim; ++i) {
+			sum += p[i];
+		}
+		return sum;
+	}
 
 	template<size_t dim>
 	Point<dim> operator- (const Point<dim>& arr1,

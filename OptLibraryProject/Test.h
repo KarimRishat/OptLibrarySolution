@@ -49,5 +49,9 @@ namespace Tests
 
     //Function
     void Func1();
+    void FuncGrad();
+    void FuncHess();
+    void FunParab();
+    void FunGrad();
 }
 

@@ -35,5 +35,9 @@ int main()
     /*Tests::SOPVAL();
     Tests::SOPVAL2();
     Tests::SortSopv();*/
-    Tests::Func1();
+    //Tests::Func1();
+   /* Tests::FuncGrad();
+    Tests::FuncHess();*/
+    //Tests::FunParab();
+    Tests::FunGrad();
 }
