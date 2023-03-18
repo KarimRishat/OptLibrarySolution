@@ -346,6 +346,31 @@ namespace OptLib
 		return Res;
 	}
 
+	template<size_t dim>
+	SetOfPoints < dim, Point<1>> Tr(const Point<dim>& p)
+	{
+		SetOfPoints<dim, Point<1>> SOP;
+		for (size_t i = 0; i < dim; i++)
+		{
+			Point<1> q{ p[i] };
+			SOP[i] = q;
+		}
+		return SOP;
+	}
+
+	//diffferent
+	/*template<size_t dim, size_t count>
+	SetOfPoints < dim, Point<count>> Tr(const SetOfPoints<count, Point<dim>>& set)
+	{
+		SetOfPoints<dim, Point<count>> SOP;
+		for (size_t i = 0; i < dim; i++)
+		{
+			Point<count> q{ p[i] };
+			SOP[i] = q;
+		}
+		return SOP;
+	}*/
+
 
 	//TRANS FOR RECTANGLE MATRIX
 	/*static constexpr size_t Dim = dim;*/
@@ -391,6 +416,54 @@ namespace OptLib
 		}
 		return Tr(res);
 	}
+
+	template<size_t dim>
+	SetOfPoints<dim, Point<1>> operator* (const SetOfPoints<dim, Point<1>> x,
+		const SetOfPoints<dim, Point<dim>> A)
+	{
+		SetOfPoints<dim, Point<1>> res;
+		for (size_t i = 0; i < dim; i++)
+		{
+			Point<1>  q{ 0.0 };
+			for (size_t j = 0; j < dim; j++)
+			{
+				q = q + x[j][0] * A[i][j];
+			}
+			res[i] = q;
+		}
+		return res;
+	}
+
+	template<size_t dim>
+	double operator* (const SetOfPoints<dim, Point<1>> x,
+		const Point<dim> p)
+	{
+		double res = 0.0;
+		for (size_t i = 0; i < dim; i++)
+		{
+			res += x[i][0] * p[i];
+		}
+		return res;
+	}
+
+	//different 
+	/*template<size_t count1, size_t dim, size_t count2>
+	SetOfPoints<count2, Point<count1>> operator* (const SetOfPoints<dim, Point<count1>> set1,
+		const SetOfPoints<count2, Point<dim>> set2)
+	{
+		SetOfPoints<count2, Point<count1>> res;
+		for (size_t i = 0; i < count2; i++)
+		{
+			for (size_t j = 0; j < count1; j++)
+			{
+
+			}
+		}
+		return res;
+	}*/
+
+
+	
 
 
 	//”множение через —кал€рное произведение

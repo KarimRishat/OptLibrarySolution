@@ -20,7 +20,13 @@ namespace OptLib
 			}
 
 
-			double operator() (const Point<dim>&p, SetOfPoints<)
+			double operator() (const Point<dim>& x, SetOfPoints <dim, Point<dim>> A)	//f = tr(x)*A*x
+			{
+				SetOfPoints<dim, Point<1>> x_{ Tr(x) };
+				SetOfPoints<dim, Point<1>> mult = x_ * A;
+				double res = mult * x;
+				return res;
+			}
 
 			Point<dim> grad(const Point<dim>& p) const override
 			{

@@ -35,6 +35,7 @@ namespace Tests
     //SetOfPoints
     void SetOfPoints();
     void SetOfPointsMult();
+    void SetOfPointsTrPoint();
 
     void MeanTest();
     void DispTest();
@@ -53,5 +54,6 @@ namespace Tests
     void FuncHess();
     void FunParab();
     void FunGrad();
+    void FunParabFind();
 }
 

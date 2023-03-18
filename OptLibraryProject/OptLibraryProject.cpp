@@ -17,6 +17,9 @@ int main()
     Tests::test10();
     Tests::test11();
     Tests::testDotProd();
+
+    //POINTVAL
+
     std::cout <<'\n' << '\t' << "POINT VAL\n";
     Tests::PointvalPlus();
     Tests::PointValMinus();
@@ -28,6 +31,10 @@ int main()
     Tests::PointvalMinusScal();
     Tests::PointvalMultScal();
     Tests::PointvalDivScal();*/
+
+
+    //SETOFPOINTS
+
     /*Tests::SetOfPoints();
     Tests::SetOfPointsMult();*/
     /*Tests::MeanTest();
@@ -35,9 +42,14 @@ int main()
     /*Tests::SOPVAL();
     Tests::SOPVAL2();
     Tests::SortSopv();*/
+
+    //FUNCTIONS
+
     //Tests::Func1();
    /* Tests::FuncGrad();
     Tests::FuncHess();*/
     //Tests::FunParab();
-    Tests::FunGrad();
+    /*Tests::SetOfPointsTrPoint();
+    Tests::FunGrad();*/
+    Tests::FunParabFind();
 }

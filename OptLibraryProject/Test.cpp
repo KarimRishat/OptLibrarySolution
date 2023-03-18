@@ -253,6 +253,14 @@ void Tests::SetOfPointsMult()
     std::cout << '\n' << set1 * set2;
 }
 
+void Tests::SetOfPointsTrPoint()
+{
+    constexpr size_t n = 5;
+    Point<n> p1 = { 1, 2, 3, 4, 5 };
+    OptLib::SetOfPoints<n, Point<1>> set1 = Tr(p1);
+    std::cout << '\n' << p1 << "\n Transp : \n" << set1;
+}
+
 void Tests::MeanTest()
 {
     constexpr size_t n = 2;
@@ -399,6 +407,17 @@ void Tests::FunGrad()
     std::cout << "\n\n\np1: " << p1 << "\ngrad(p1):\n" << grad1 << "\np2:\n" <<
         p2 << "\ngrad(p2):\n" << par2->grad(p2);
 
+}
+
+void Tests::FunParabFind()
+{
+    Point<2> x{ 0.5, 0.6 };
+    Point<2> p1{ 0.0, 5.0 };
+    Point<2> p2{ 3, 4 };
+    OptLib::SetOfPoints<2, Point<2>> A{ p1, p2};
+    ConcreteFunc::paraboloid<2>* f2 = new ConcreteFunc::paraboloid<2>{};
+    double a = (*f2)(x, A);
+    std::cout << "x:\n" << x << "\nA:\n" << A << "f(x,A): " << a;
 }
 
 
