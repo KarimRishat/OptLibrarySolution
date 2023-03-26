@@ -51,5 +51,10 @@ int main()
     //Tests::FunParab();
     /*Tests::SetOfPointsTrPoint();
     Tests::FunGrad();*/
-    Tests::FunParabFind();
+   /* Tests::FunParabFind();
+    Tests::TestGradParab();
+    Tests::TestHessParab();
+    Tests::planeTest();*/
+
+    Tests::GradDirectTest();
 }

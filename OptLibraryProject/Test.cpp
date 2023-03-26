@@ -375,49 +375,67 @@ void Tests::FuncHess()
 
     ConcreteFunc::sinus* sinus = new ConcreteFunc::sinus{};
     ConcreteFunc::sinus2* sinus2 = new ConcreteFunc::sinus2{};
-    Point<1> grad1 = sinus->hess(p1);
+    OptLib::SetOfPoints<1,Point<1>> grad1 = sinus->hess(p1);
 
     std::cout << "\nHess:\np1: " << p1 << "\nhess(p1):\n" << grad1 << "\np2:\n" <<
         p2 << "\nhess(p2):\n" << sinus2->hess(p2);
 }
 
-void Tests::FunParab()
-{
-    Point<1> p1{ 1.2 };
-    Point<2> p2{ 0.5, 0.6 };
-
-    FuncInterface::IFunc<1>* f1 = new ConcreteFunc::paraboloid<1>{};
-    FuncInterface::IFunc<2>* f2 = new ConcreteFunc::paraboloid<2>{};
-
-    double a = (*f1)(p1);
-    double b = (*f2)(p2);
-
-    std::cout << p1 <<'\n' << a << "\np2:\n" << p2 << '\n' << b;
-}
-
-void Tests::FunGrad()
-{
-    Point<1> p1{ 1.2 };
-    Point<2> p2{ 0.5, 0.6 };
-
-    ConcreteFunc::paraboloid<1>* par1 = new ConcreteFunc::paraboloid<1>{};
-    ConcreteFunc::paraboloid<2>* par2 = new ConcreteFunc::paraboloid<2>{};
-    Point<1> grad1 = par1->grad(p1);
-
-    std::cout << "\n\n\np1: " << p1 << "\ngrad(p1):\n" << grad1 << "\np2:\n" <<
-        p2 << "\ngrad(p2):\n" << par2->grad(p2);
-
-}
 
 void Tests::FunParabFind()
 {
-    Point<2> x{ 0.5, 0.6 };
-    Point<2> p1{ 0.0, 5.0 };
+    Point<2> x{ 1, 2 };
+    Point<2> p1{ 3.0, 5.0 };
     Point<2> p2{ 3, 4 };
     OptLib::SetOfPoints<2, Point<2>> A{ p1, p2};
-    ConcreteFunc::paraboloid<2>* f2 = new ConcreteFunc::paraboloid<2>{};
-    double a = (*f2)(x, A);
+    ConcreteFunc::paraboloid<2>* f2 = new ConcreteFunc::paraboloid<2>{std::move(A)};
+    double a = (*f2)(x);
     std::cout << "x:\n" << x << "\nA:\n" << A << "f(x,A): " << a;
+}
+
+void Tests::TestGradParab()
+{
+    Point<2> x{ 1, 2 };
+    Point<2> p1{ 3.0, 5.0 };
+    Point<2> p2{ 3, 4 };
+    OptLib::SetOfPoints<2, Point<2>> A{ p1, p2 };
+    ConcreteFunc::paraboloid<2>* f2 = new ConcreteFunc::paraboloid<2>{ std::move(A) };
+    Point<2> grad = f2->grad(x);
+    std::cout << "\n\nGradient:\n" << grad;
+}
+
+void Tests::TestHessParab()
+{
+    Point<2> x{ 1, 2 };
+    Point<2> p1{ 3.0, 5.0 };
+    Point<2> p2{ 3, 4 };
+    OptLib::SetOfPoints<2, Point<2>> A{ p1, p2 };
+    ConcreteFunc::paraboloid<2>* f2 = new ConcreteFunc::paraboloid<2>{ std::move(A) };
+    OptLib::SetOfPoints<2,Point<2>> hess = f2->hess(x);
+    std::cout << "\n\nHess:\n" << hess;
+}
+
+void Tests::planeTest()
+{
+    Point<5> x{ 1,2,3,4,5 };
+    double k = 5.0, b = 10.0;
+    ConcreteFunc::plane<5>* f2 = new ConcreteFunc::plane<5>{k,b};
+    double a = (*f2)(x);
+    std::cout << "\n\nplane\nx:\n" << x <<  "\nf(x) = 5x+10: " << a;
+    Point<5> grad = f2->grad(x);
+    std::cout << "\n\nGradient:\n" << grad;
+}
+
+void Tests::GradDirectTest()
+{
+    Point<2> x{ 1, 2 };
+    FuncInterface::IFuncWithGrad<2>* f = new ConcreteFunc::sinus2{};
+    
+    ConcreteFunc::FuncAlongGradDirection<Point<2>, FuncInterface::IFuncWithGrad<2>>* F =
+        new ConcreteFunc::FuncAlongGradDirection<Point<2>,FuncInterface::IFuncWithGrad<2>>{ x,f };
+    Point<1> gamma{ 5.0 };
+    std::cout << "F"<<gamma<<" = "<<(*F)(gamma)<<"\ngrad"<<gamma<<" = "
+        <<F->grad(gamma);
 }
 
 

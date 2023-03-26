@@ -55,5 +55,10 @@ namespace Tests
     void FunParab();
     void FunGrad();
     void FunParabFind();
+    void TestGradParab();
+    void TestHessParab();
+    void planeTest();
+
+    void GradDirectTest();
 }
 

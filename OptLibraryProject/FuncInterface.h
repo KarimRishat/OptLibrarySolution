@@ -60,7 +60,7 @@ namespace OptLib
 		class IHess
 		{
 		public:
-			virtual Point<dim> hess(const Point<dim>& p) const = 0;
+			virtual SetOfPoints<dim,Point<dim>> hess(const Point<dim>& p) const = 0;
 		};
 
 
