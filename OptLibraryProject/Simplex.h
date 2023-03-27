@@ -114,6 +114,8 @@ namespace OptLib
 		return result;
 	}
 
+
+
 	template<size_t dim>
 	Point<dim> sqrt (const Point<dim>& arr) {
 		Point<dim> result;

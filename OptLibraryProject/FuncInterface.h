@@ -83,27 +83,43 @@ namespace OptLib
 
 		};
 
-		template<size_t dim>
-		class Sin : public IFuncWithHess<dim>
+		template<size_t dimX, size_t dimP>
+		class IFuncParam
 		{
-			//virtual double operator() (const Point<dim>& p) const = 0;
 		public:
-			/*double operator() (Point<dim> p) const override
+			virtual double operator()(const Point<dimX>& x,
+				const Point<dimP>& p) const = 0;
+			template<size_t count>
+			Point<count> operator() (const SetOfPoints<count, Point<dimX>>& sop,
+				const Point<dimP>& p) const
 			{
-
+				Point<count> out;
+				for (size_t i = 0; i < count; i++)
+				{
+					out[i] = (*this)(sop[i], p);
+				}
+				return out;
 			}
-
-			Point<dim> grad(const Point<dim>& p) const override 
-			{
-				
-			}
-
-			Point<dim> hess(const Point<dim> p) const override 
-			{
-
-			}*/
-			
 		};
+
+
+
+		//for sigma and mu
+		
+		/*template<class Tag>
+		class MySet
+		{
+		public:
+			double value;
+			MySet(double v) :
+				value{ v } {}
+		};*/
+
+		//operator""~meter
+		/*using Mean = MySet<struct Mean {} > ;
+		using DispSqr = MySet<struct disp_sqr {} > ;*/
+
+
 
 
 		

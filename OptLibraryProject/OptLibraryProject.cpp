@@ -56,5 +56,7 @@ int main()
     Tests::TestHessParab();
     Tests::planeTest();*/
 
-    Tests::GradDirectTest();
+    //Tests::GradDirectTest();
+
+    Tests::FuncParam();
 }

@@ -60,5 +60,9 @@ namespace Tests
     void planeTest();
 
     void GradDirectTest();
+
+
+    //funcParam
+    void FuncParam();
 }
 

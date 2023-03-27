@@ -438,4 +438,16 @@ void Tests::GradDirectTest()
         <<F->grad(gamma);
 }
 
+void Tests::FuncParam()
+{
+    Point<1> x{ 2 };
+    Point<2> p{ 1, 2 };
+    ConcreteFunc::ExpWithParam<1>* f = new ConcreteFunc::ExpWithParam<1>{};
+    double res = (*f)(x, p);
+    std::cout << "x = " << x << "\n(mu, sigma) = " << p
+        << "f(x|mu, sigma) = " << res;
+    std::pow(5, 2);
+
+}
+
 

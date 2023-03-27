@@ -1,7 +1,8 @@
 #pragma once
+
 #include <cmath>
 #include "FuncInterface.h"
-
+#define M_PI 3.14159265358979323846;
 
 namespace OptLib
 {
@@ -164,5 +165,38 @@ namespace OptLib
 
 		//Переделать гиссиан - квадратная матрица	-	done
 
+
+
+
+		//FUNC WITH PARAM
+
+
+		//c*exp(-(x-mu^2)/(sigma^2))
+		//mu  - point[0], sigma - point[1]
+		template<size_t dimX>
+		class ExpWithParam:public FuncInterface::IFuncParam<dimX, 2*dimX>
+		{
+		public:
+			double operator()(const Point<dimX>& x,
+				const Point<2*dimX>& p)	const override
+			{
+				double C = 1.0;
+				for (size_t i = 0; i < dimX; i++)
+				{
+					if (p[dimX + i] < 0)
+						return 0.0;
+
+					C *= std::pow(1 / p[dimX + i], dimX / 2);
+				}
+				C *= 1 / (std::pow(M_PI*2, dimX / 2));
+
+				Point<dimX> res;
+				for (size_t i = 0; i < dimX; i++)
+				{
+					res[i] = (x[i] - p[i]) * (x[i] - p[i]) / p[dimX + i];
+				}
+				return C*exp((-1)*pointToDouble(res));
+			}
+		};
 	}
 }
