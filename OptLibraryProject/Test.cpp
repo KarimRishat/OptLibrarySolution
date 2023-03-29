@@ -445,8 +445,7 @@ void Tests::FuncParam()
     ConcreteFunc::ExpWithParam<1>* f = new ConcreteFunc::ExpWithParam<1>{};
     double res = (*f)(x, p);
     std::cout << "x = " << x << "\n(mu, sigma) = " << p
-        << "f(x|mu, sigma) = " << res;
-    std::pow(5, 2);
+        << "\nf(x|mu, sigma) = " << res;
 
 }
 

@@ -2,7 +2,7 @@
 
 #include <cmath>
 #include "FuncInterface.h"
-#define M_PI 3.14159265358979323846;
+const double M_PI = 3.14159265358979323846;
 
 namespace OptLib
 {
@@ -171,7 +171,7 @@ namespace OptLib
 		//FUNC WITH PARAM
 
 
-		//c*exp(-(x-mu^2)/(sigma^2))
+		//c*exp(-(x-mu)^2/(sigma^2))
 		//mu  - point[0], sigma - point[1]
 		template<size_t dimX>
 		class ExpWithParam:public FuncInterface::IFuncParam<dimX, 2*dimX>
@@ -181,21 +181,27 @@ namespace OptLib
 				const Point<2*dimX>& p)	const override
 			{
 				double C = 1.0;
+				double arg = (double)dimX/2;
 				for (size_t i = 0; i < dimX; i++)
 				{
 					if (p[dimX + i] < 0)
 						return 0.0;
-
-					C *= std::pow(1 / p[dimX + i], dimX / 2);
+					double sigma = std::sqrt(1 / p[dimX + i]);
+					C *= std::pow(sigma,arg);
 				}
-				C *= 1 / (std::pow(M_PI*2, dimX / 2));
+				double PI2 = std::sqrt(M_PI * 2);
+				C *= 1 / (std::pow(PI2, arg));
 
 				Point<dimX> res;
 				for (size_t i = 0; i < dimX; i++)
 				{
-					res[i] = (x[i] - p[i]) * (x[i] - p[i]) / p[dimX + i];
+					double y = x[i];
+					double mu = p[i];
+					double sigma = p[dimX + i];
+					//res[i] = (x[i] - p[i]) * (x[i] - p[i]) / p[dimX + i];
+					res[i] = (y - mu) * (y - mu) / sigma;
 				}
-				return C*exp((-1)*pointToDouble(res));
+				return C*exp((-0.5)*pointToDouble(res));
 			}
 		};
 	}
