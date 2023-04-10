@@ -67,30 +67,7 @@ namespace OptLib
 
 		};
 
-		template <size_t dim>
-		class plane : public FuncInterface::IFuncWithGrad<dim> {
-			double k,b;
-		public:
-
-			double operator() (const Point<dim>& p) const override
-			{
-				Point<dim> res = k * p;
-				return pointToDouble(res) + b;
-			}
-
-			Point<dim> grad(const Point<dim>& p) const override
-			{
-				Point<dim> res;
-				for (size_t i = 0; i < dim; i++)
-				{
-					res[i] = k;
-				}
-				return res;
-			}
-
-			plane(double& k, double& b) :k{ k }, b{ b } {}
-
-		};
+		
 
 
 		class sinus : public OptLib::FuncInterface::IFuncWithHess<1> {
@@ -171,7 +148,7 @@ namespace OptLib
 		//FUNC WITH PARAM
 
 
-		//c*exp(-(x-mu)^2/(sigma^2))
+		//c*exp(-(x-mu)^2/(sigma^2))	- norm raspr
 		//mu  - point[0], sigma - point[1]
 		template<size_t dimX>
 		class ExpWithParam:public FuncInterface::IFuncParam<dimX, 2*dimX>
@@ -186,10 +163,10 @@ namespace OptLib
 				{
 					if (p[dimX + i] < 0)
 						return 0.0;
-					double sigma = std::sqrt(1 / p[dimX + i]);
+					double sigma = 1 / p[dimX + i];
 					C *= std::pow(sigma,arg);
 				}
-				double PI2 = std::sqrt(M_PI * 2);
+				double PI2 = M_PI * 2;
 				C *= 1 / (std::pow(PI2, arg));
 
 				Point<dimX> res;
@@ -204,5 +181,33 @@ namespace OptLib
 				return C*exp((-0.5)*pointToDouble(res));
 			}
 		};
+
+
+
+		
+		class planeParam : public FuncInterface::IFuncParam<1,2> {
+		public:
+
+			double operator() (const Point<1>& x, const Point<2>& p) const override
+			{
+				double k = p[0], b = p[1];
+				Point<1> res = k * x;
+				return res[0] + b;
+			}
+
+			/*Point<dim> grad(const Point<dim>& p) const override
+			{
+				Point<dim> res;
+				for (size_t i = 0; i < dim; i++)
+				{
+					res[i] = k;
+				}
+				return res;
+			}*/
+
+
+		};
+
+
 	}
 }

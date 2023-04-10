@@ -52,17 +52,19 @@ namespace Tests
     void Func1();
     void FuncGrad();
     void FuncHess();
-    void FunParab();
-    void FunGrad();
     void FunParabFind();
     void TestGradParab();
     void TestHessParab();
-    void planeTest();
+
 
     void GradDirectTest();
 
 
     //funcParam
     void FuncParam();
+    void ParamPlaneTest();
+
+    //optim
+    void simplexTest(); 
 }
 

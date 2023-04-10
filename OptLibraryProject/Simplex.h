@@ -21,6 +21,18 @@ namespace OptLib
 		return result;
 	}
 	
+	/*template<size_t dim>
+	operator double(const Point<dim>& p) {
+		double sum = 0;
+		for (double value : p) {
+			sum += value;
+		}
+		return sum;
+	}*/
+	//The conversion operator must be a non-static member function or a non-member function
+
+	
+
 	template<size_t dim>
 	double pointToDouble(const Point<dim>& p) {
 		double sum = 0;
@@ -548,9 +560,24 @@ namespace OptLib
 		}
 
 
-		
+		std::pair<point, point> Dispersion() const
+		{
+			point avg{ Mean() };
+			point disp{ Variance() };
+			return{ avg,disp };
+		}
 	
 	};
+
+
+	template<typename point>
+	std::pair<point, point> VarCoef(point avg, point disp)
+	{
+		std::pair<point,point> res;
+		res.first = OptLib::sqrt(disp);
+		res.second = res.first / OptLib::abs(avg);
+		return res;
+	}
 
 
 	template<size_t count, typename point, typename pointVal>

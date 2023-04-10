@@ -58,5 +58,6 @@ int main()
 
     //Tests::GradDirectTest();
 
-    Tests::FuncParam();
+    //Tests::FuncParam();
+    Tests::ParamPlaneTest();
 }

@@ -151,6 +151,7 @@
     <ClInclude Include="Simplex.h" />
     <ClInclude Include="SimplexOps.h" />
     <ClInclude Include="SimplexStream.h" />
+    <ClInclude Include="StateInterfaceh.h" />
     <ClInclude Include="Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

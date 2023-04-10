@@ -415,16 +415,7 @@ void Tests::TestHessParab()
     std::cout << "\n\nHess:\n" << hess;
 }
 
-void Tests::planeTest()
-{
-    Point<5> x{ 1,2,3,4,5 };
-    double k = 5.0, b = 10.0;
-    ConcreteFunc::plane<5>* f2 = new ConcreteFunc::plane<5>{k,b};
-    double a = (*f2)(x);
-    std::cout << "\n\nplane\nx:\n" << x <<  "\nf(x) = 5x+10: " << a;
-    Point<5> grad = f2->grad(x);
-    std::cout << "\n\nGradient:\n" << grad;
-}
+
 
 void Tests::GradDirectTest()
 {
@@ -447,6 +438,15 @@ void Tests::FuncParam()
     std::cout << "x = " << x << "\n(mu, sigma) = " << p
         << "\nf(x|mu, sigma) = " << res;
 
+}
+
+void Tests::ParamPlaneTest()
+{
+    Point<1> x{ 2 };
+    Point<2> p{ 5, 2 };
+    FuncInterface::IFuncParam<1, 2>* f = new ConcreteFunc::planeParam{};
+    double res = (*f)(x, p);
+    std::cout << "x = " << x << "\n(k,b) = " << p << "\nk * x + b = " << res;
 }
 
 

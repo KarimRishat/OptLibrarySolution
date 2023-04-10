@@ -104,6 +104,45 @@ namespace OptLib
 
 
 
+		//a = a0
+		/*class StaticParams
+		{
+			Point<2> a{ 1.0, 2.0 };
+		};*/
+
+
+		template<size_t dimX>
+		class IFuncWithStaticParams :
+			public IFuncParam<dimX, 2>,
+			public IFunc<dimX> 
+		{
+			Point<2> params;
+			IFuncParam* f
+		public:
+			IFuncWithStaticParams(const Point<2> p) :
+				params{ 1.0, 2.0 } {};
+			double operator()(const Point<dim> x) const override
+			{
+				return(*f)(x, params);
+			}
+		};
+
+
+
+		/*template<size_t dim, size_t dimP, typename T>
+		class FuncWithConcreteParam :public IFunc<dim>
+		{
+		public:
+			Point<dimP> par;
+			T  f;
+			double operator ()(const Point<dim>& ap)const
+			{
+				return  f.operator()(ap, par);
+			}
+
+		};*/
+
+
 		//for sigma and mu
 		
 		/*template<class Tag>
@@ -118,6 +157,9 @@ namespace OptLib
 		//operator""~meter
 		/*using Mean = MySet<struct Mean {} > ;
 		using DispSqr = MySet<struct disp_sqr {} > ;*/
+
+
+
 
 
 
