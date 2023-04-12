@@ -571,11 +571,11 @@ namespace OptLib
 
 
 	template<typename point>
-	std::pair<point, point> VarCoef(point avg, point disp)
+	std::pair<point, point> VarCoef(const point& avg, const point& disp)
 	{
 		std::pair<point,point> res;
-		res.first = OptLib::sqrt(disp);
-		res.second = res.first / OptLib::abs(avg);
+		res.second = OptLib::sqrt(disp);
+		res.first = res.second / OptLib::abs(avg);
 		return res;
 	}
 
@@ -629,6 +629,9 @@ namespace OptLib
 
 			//std::sort(ItsSetOfPoints.begin(), ItsSetOfPoints.end());
 
+			std::sort(std::begin(this->ItsSetOfPoints), std::end(this->ItsSetOfPoints),
+				[](const auto& lhs, const auto& rhs) {
+					return lhs.val < rhs.val; });
 		}
 	public:
 

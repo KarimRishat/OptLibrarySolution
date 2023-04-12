@@ -40,8 +40,8 @@ int main()
     /*Tests::MeanTest();
     Tests::DispTest();*/
     /*Tests::SOPVAL();
-    Tests::SOPVAL2();
-    Tests::SortSopv();*/
+    Tests::SOPVAL2();*/
+    Tests::SortSopv();
 
     //FUNCTIONS
 
@@ -59,5 +59,5 @@ int main()
     //Tests::GradDirectTest();
 
     //Tests::FuncParam();
-    Tests::ParamPlaneTest();
+    //Tests::ParamPlaneTest();
 }

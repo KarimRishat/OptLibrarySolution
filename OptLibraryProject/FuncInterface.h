@@ -117,11 +117,11 @@ namespace OptLib
 			public IFunc<dimX> 
 		{
 			Point<2> params;
-			IFuncParam* f
+			IFuncParam<dimX, 2>* f;
 		public:
 			IFuncWithStaticParams(const Point<2> p) :
 				params{ 1.0, 2.0 } {};
-			double operator()(const Point<dim> x) const override
+			double operator()(const Point<dimX> x) const override
 			{
 				return(*f)(x, params);
 			}

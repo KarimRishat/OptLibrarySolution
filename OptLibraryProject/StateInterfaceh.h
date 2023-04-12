@@ -35,17 +35,17 @@ namespace OptLib
 			{
 				auto [avg, disp] = GuessDomain().Dispersion();	//структура из двух дабллов - поинтов
 				auto [var, std] {
-					OptLib::VarCoef<PointVal<dim>>(avg, disp)	//коеф вариации mu/sqrt(disp)	(simplex.h RawSet)
+					OptLib::VarCoef<PointVal<dim>>(avg, disp)	//коеф вариации sqrt(disp)/mu	(simplex.h RawSet)
 				};	//structured binding
 
-				bool f = true;
-				for (size_t i = 0; i < var.size(); i++)
+				for (size_t i = 0; i < dim; i++)
 				{
-					f = (std[i] < abs_tol) || (var[i] < rel_tol);
-					if (!f)
-						break;
+					
+					bool f = (((std[i]) < abs_tol) || (var[i] < rel_tol)) && 
+						(((std.val) < abs_tol) || (var.val < rel_tol));
+					if (!f) return false;
 				}
-				f = (std.val < abs_tol) || (var.val < rel_tol);
+				
 				return f;
 			}
 
