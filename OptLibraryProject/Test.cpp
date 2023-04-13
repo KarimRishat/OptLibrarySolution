@@ -449,4 +449,9 @@ void Tests::ParamPlaneTest()
     std::cout << "x = " << x << "\n(k,b) = " << p << "\nk * x + b = " << res;
 }
 
+void Tests::simplexTest()
+{
+    
+}
+
 

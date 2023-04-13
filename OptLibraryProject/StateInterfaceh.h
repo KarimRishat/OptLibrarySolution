@@ -31,6 +31,14 @@ namespace OptLib
 			public IState<dim>
 		{
 		public:
+
+			IStateSimplex(SetOfPoint<dim+1,Point<dim>>&& State, 
+				FuncInterface::IFunc<dim>* f)
+			{
+				UpdateDomain(std::move(State), f)
+			}
+			IStateSimplex() {}
+
 			bool IsConverged(double abs_tol, double rel_tol) const override
 			{
 				auto [avg, disp] = GuessDomain().Dispersion();	//структура из двух дабллов - поинтов
@@ -46,8 +54,41 @@ namespace OptLib
 					if (!f) return false;
 				}
 				
-				return f;
+				return true;
 			}
+
+			simplex GuessDomain() {
+				return its_guess_domain;
+			}
+
+			std::array<double, dim + 1> FuncVals(const SetOfPoints<dim + 1, Point<dim>>&
+				State, const IFunc<dim>* f)
+			{
+				return (*f)(State);
+			}
+
+			void UpdateDomain(SetOfPoints<dim + 1, Point<dim>>&& State,
+				std::array<double, dim + 1 >> && fvals)
+			{
+				SetDomain(simplex{
+					simplex::make_field(std::move(State), std::move(fvals))
+					});
+			}
+
+			virtual void SetDomain(SetOfPoints<dim + 1, PointVal<dim>>&& State) {
+				its_guess_domain = simplex{ std::move(State) };
+				its_guess = GuessDomain().Mean();
+			}
+
+			void UpdateDomain(SetOfPoints<dim + 1, Point<dim>>&& State,
+				const FuncInterface::IFunc<dim>* f)
+			{
+				UpdateDomain(std::move(State), std::move(FuncVals(State, f));
+			}
+
+		protected:
+			simplex its_guess_domain;	//sopVal
+			
 
 		};//simplex
 		//Нужна сортировка которая была в simplex

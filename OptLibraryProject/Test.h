@@ -3,6 +3,7 @@
 #include "Simplex.h"
 #include "SimplexStream.h"
 #include "Func.h"
+#include "ConcreteState.h"
 using namespace OptLib;
 namespace Tests
 {
@@ -66,5 +67,7 @@ namespace Tests
 
     //optim
     void simplexTest(); 
+
+
 }
 
