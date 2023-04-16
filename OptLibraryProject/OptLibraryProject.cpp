@@ -41,7 +41,7 @@ int main()
     Tests::DispTest();*/
     /*Tests::SOPVAL();
     Tests::SOPVAL2();*/
-    Tests::SortSopv();
+    //Tests::SortSopv();
 
     //FUNCTIONS
 
@@ -60,4 +60,9 @@ int main()
 
     //Tests::FuncParam();
     //Tests::ParamPlaneTest();
+
+
+
+    /*Tests State*/
+    Tests::SegmentTest();
 }

@@ -32,7 +32,7 @@ namespace OptLib
 		{
 		public:
 
-			IStateSimplex(SetOfPoint<dim+1,Point<dim>>&& State, 
+			IStateSimplex(SetOfPoints<dim+1,Point<dim>>&& State, 
 				FuncInterface::IFunc<dim>* f)
 			{
 				UpdateDomain(std::move(State), f)
@@ -61,14 +61,14 @@ namespace OptLib
 				return its_guess_domain;
 			}
 
-			std::array<double, dim + 1> FuncVals(const SetOfPoints<dim + 1, Point<dim>>&
-				State, const IFunc<dim>* f)
+			std::array<double, dim + 1> FuncVals(const 
+				SetOfPoints<dim + 1, Point<dim>>& State, const IFunc<dim>* f)
 			{
 				return (*f)(State);
 			}
 
 			void UpdateDomain(SetOfPoints<dim + 1, Point<dim>>&& State,
-				std::array<double, dim + 1 >> && fvals)
+				Point<double, dim + 1 >> && fvals)
 			{
 				SetDomain(simplex{
 					simplex::make_field(std::move(State), std::move(fvals))
@@ -83,7 +83,7 @@ namespace OptLib
 			void UpdateDomain(SetOfPoints<dim + 1, Point<dim>>&& State,
 				const FuncInterface::IFunc<dim>* f)
 			{
-				UpdateDomain(std::move(State), std::move(FuncVals(State, f));
+				UpdateDomain(std::move(State), std::move(FuncVals(State, f)));
 			}
 
 		protected:

@@ -66,7 +66,7 @@ namespace Tests
     void ParamPlaneTest();
 
     //optim
-    void simplexTest(); 
+    void SegmentTest(); 
 
 
 }

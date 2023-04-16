@@ -31,7 +31,7 @@ namespace OptLib
 			SetOfPoints<2, Point<1>> OrderPointInSegment
 				(SetOfPoints<2, Point<1>>& set)
 			{
-				if (set[0] > set[1])
+				if (set[0][0] > set[1][0])
 				{
 					std::swap(set[0], set[1]);
 				}

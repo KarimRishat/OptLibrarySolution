@@ -449,9 +449,17 @@ void Tests::ParamPlaneTest()
     std::cout << "x = " << x << "\n(k,b) = " << p << "\nk * x + b = " << res;
 }
 
-void Tests::simplexTest()
+void Tests::SegmentTest()
 {
-    
+    ConcreteFunc::sinus f{};
+
+    ConcreteState::StateSegment State{ {0.0,1.0} , &f };
+    std::cout << "The state simplex is     " << State.GuessDomain() << "\n";
+    std::cout << "The state is converged:  " << State.IsConverged(0.01, 0.01) << "\n";
+
+    State.UpdateDomain({ -7,2.0 }, &f);
+    std::cout << "The new state simplex is " << State.GuessDomain() << "\n";
+    std::cout << "The state is converged:  " << State.IsConverged(0.01, 0.01) << "\n";
 }
 
 
