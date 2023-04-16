@@ -35,22 +35,24 @@ namespace OptLib
 			IStateSimplex(SetOfPoints<dim+1,Point<dim>>&& State, 
 				FuncInterface::IFunc<dim>* f)
 			{
-				UpdateDomain(std::move(State), f)
+				UpdateDomain(std::move(State), f);
 			}
 			IStateSimplex() {}
 
 			bool IsConverged(double abs_tol, double rel_tol) const override
 			{
-				auto [avg, disp] = GuessDomain().Dispersion();	//структура из двух дабллов - поинтов
-				auto [var, std] {
-					OptLib::VarCoef<PointVal<dim>>(avg, disp)	//коеф вариации sqrt(disp)/mu	(simplex.h RawSet)
-				};	//structured binding
+				auto [avg, disp] = its_guess_domain.Dispersion();	
+				//структура из двух дабллов - поинтов
+				auto [var, sd] =
+					VarCoef<PointVal<dim>>(avg, disp);	
+				//коеф вариации sqrt(disp)/mu	(simplex.h RawSet)
+						//structured binding
 
 				for (size_t i = 0; i < dim; i++)
 				{
 					
-					bool f = (((std[i]) < abs_tol) || (var[i] < rel_tol)) && 
-						(((std.val) < abs_tol) || (var.val < rel_tol));
+					bool f = (((sd[i]) < abs_tol) || (var[i] < rel_tol)) && 
+						(((sd.val) < abs_tol) || (var.val < rel_tol));
 					if (!f) return false;
 				}
 				
@@ -61,23 +63,35 @@ namespace OptLib
 				return its_guess_domain;
 			}
 
-			std::array<double, dim + 1> FuncVals(const 
-				SetOfPoints<dim + 1, Point<dim>>& State, const IFunc<dim>* f)
+			Point<dim + 1> FuncVals(const 
+				SetOfPoints<dim + 1, Point<dim>>& State, const FuncInterface::IFunc<dim>* f)
 			{
 				return (*f)(State);
 			}
 
-			void UpdateDomain(SetOfPoints<dim + 1, Point<dim>>&& State,
-				Point<double, dim + 1 >> && fvals)
+			/*void UpdateDomain(SetOfPoints<dim + 1, Point<dim>>&& State,
+				Point<dim + 1> && fvals)
 			{
+
 				SetDomain(simplex{
 					simplex::make_field(std::move(State), std::move(fvals))
-					});
+					}
+				);
+			}*/
+
+
+			void UpdateDomain(SetOfPoints<dim + 1, Point<dim>>&& State,
+				Point<dim + 1>&& fvals)
+			{
+				
+				SetOfPoints<dim + 1, PointVal<dim>> points = 
+					simplex::make_field(std::move(State), std::move(fvals));
+				SetDomain(std::move(points));
 			}
 
 			virtual void SetDomain(SetOfPoints<dim + 1, PointVal<dim>>&& State) {
 				its_guess_domain = simplex{ std::move(State) };
-				its_guess = GuessDomain().Mean();
+				this->its_guess = GuessDomain().Mean();
 			}
 
 			void UpdateDomain(SetOfPoints<dim + 1, Point<dim>>&& State,

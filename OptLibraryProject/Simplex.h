@@ -497,19 +497,7 @@ namespace OptLib
 	//27.02
 
 
-	/*template<class T>
-	class MyClass
-	{
-	public:
-		MyClass();
-		~MyClass();
-		using my_type = T;
-		std::vector<my_type> its_size;
-
-
-	private:
-
-	};*/
+	
 
 	
 
@@ -546,11 +534,10 @@ namespace OptLib
 
 		point Variance() const	//дисперсия
 		{
-			
-			point out{0.0};
-			if constexpr (count > 1) {
-				point mean = Mean();
-				for (size_t i = 0; i < count; i++)
+			point mean = Mean();
+			point out = (ItsSetOfPoints[0] - mean) * (ItsSetOfPoints[0] - mean);
+			if constexpr (count > 1) {				
+				for (size_t i = 1; i < count; i++)
 				{
 					out = out + (ItsSetOfPoints[i] - mean) * (ItsSetOfPoints[i] - mean);
 				}
@@ -562,8 +549,8 @@ namespace OptLib
 
 		std::pair<point, point> Dispersion() const
 		{
-			point avg{ Mean() };
-			point disp{ Variance() };
+			point avg = Mean();
+			point disp =  Variance();
 			return{ avg,disp };
 		}
 	

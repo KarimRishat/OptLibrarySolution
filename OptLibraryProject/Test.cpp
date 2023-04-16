@@ -454,12 +454,12 @@ void Tests::SegmentTest()
     ConcreteFunc::sinus f{};
 
     ConcreteState::StateSegment State{ {0.0,1.0} , &f };
-    std::cout << "The state simplex is     " << State.GuessDomain() << "\n";
-    std::cout << "The state is converged:  " << State.IsConverged(0.01, 0.01) << "\n";
+    std::cout << "state1\n" << State.GuessDomain();
+    std::cout << "\nis converged:  " << State.IsConverged(0.01, 0.01) << "\n";
 
     State.UpdateDomain({ -7,2.0 }, &f);
-    std::cout << "The new state simplex is " << State.GuessDomain() << "\n";
-    std::cout << "The state is converged:  " << State.IsConverged(0.01, 0.01) << "\n";
+    std::cout << "\nstate2\n" << State.GuessDomain();
+    std::cout << "\nis converged:  " << State.IsConverged(0.01, 0.01) << "\n";
 }
 
 
