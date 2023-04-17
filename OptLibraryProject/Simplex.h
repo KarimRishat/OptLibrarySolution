@@ -274,7 +274,7 @@ namespace OptLib
 	template<size_t dim>
 	PointVal<dim> abs(const PointVal<dim>& p1)
 	{
-		PointVal<dim> res{ abs(p1.p), std::abs(p1.val) };
+		PointVal<dim> res{ abs<dim>(p1.p), std::abs(p1.val) };
 		return res;
 	}
 

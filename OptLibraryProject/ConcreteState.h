@@ -38,7 +38,48 @@ namespace OptLib
 				return set;
 			}
 
+		};//StateSegment
+
+
+
+		template<size_t dim>
+		class StatePoint : public StateInterface::IState<dim>
+		{
+		protected:
+			PointVal<dim> dx{};
+		public:
+			bool IsConverged(double abs_tol, double rel_tol) const override
+			{
+				const auto& stad = dx;
+				auto var{ abs<dim>(dx / this->Guess()) };
+				for (size_t i = 0; i < dim; i++)
+				{
+
+					bool f = (((stad[i]) < abs_tol) || (var[i] < rel_tol)) &&
+						(((stad.val) < abs_tol) || (var.val < rel_tol));
+					if (!f) return false;
+				}
+
+				return true;
+			}
 		};
+
+
+
+
+		template<size_t dim>
+		class StateNelderMead
+			:public StateDirect<dim>
+		{
+		public:
+			const double alpha, beta, gamma;
+			StateNelderMead(SetOfPoints<dim+1,Point<dim>>&& State,
+				FuncInterface::IFunc<dim> *f,
+				double alpha, double beta, double gamma):
+				StateDirect<dim>(std::move(State), f),
+				alpha{ alpha }, beta{ beta }, gamma{ gamma }{}
+		};
+
 		
 	}//concrete
 }//OptLib

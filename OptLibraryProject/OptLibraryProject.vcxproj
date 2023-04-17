@@ -146,9 +146,12 @@
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConcreteOptimizer.h" />
     <ClInclude Include="ConcreteState.h" />
     <ClInclude Include="Func.h" />
     <ClInclude Include="FuncInterface.h" />
+    <ClInclude Include="Optimizer.h" />
+    <ClInclude Include="OptimizerInterface.h" />
     <ClInclude Include="Simplex.h" />
     <ClInclude Include="SimplexOps.h" />
     <ClInclude Include="SimplexStream.h" />

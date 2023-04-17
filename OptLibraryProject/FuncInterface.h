@@ -29,8 +29,18 @@ namespace OptLib
 				this->operator()(s);
 			}*/
 
+			
 
 		};
+
+		template<size_t dim>
+		static PointVal<dim> CreateFromPoint(Point<dim>&& p, const IFunc<dim>* f)
+		{
+			PointVal<dim> out;
+			out.p = std::move(p);
+			out.val = f->operator()(out.p);
+			return out;
+		}
 
 		template<size_t dim>
 		class IGrad {
