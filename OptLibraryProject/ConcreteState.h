@@ -21,7 +21,7 @@ namespace OptLib
 			StateInterface::IStateSimplex<1, SimplexValNoSort<1>>
 		{
 		public:
-			StateSegment(const StateSegment&) = default;	//cope constr
+			StateSegment(const StateSegment&) = default;	//copy constr
 			StateSegment(SetOfPoints<2,Point<1>>&& State,
 				FuncInterface::IFunc<1> *f):
 				StateInterface::IStateSimplex<1, SimplexValNoSort<1>>
@@ -62,6 +62,9 @@ namespace OptLib
 
 				return true;
 			}
+
+			virtual
+
 		};
 
 

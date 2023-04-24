@@ -150,12 +150,14 @@
     <ClInclude Include="ConcreteState.h" />
     <ClInclude Include="Func.h" />
     <ClInclude Include="FuncInterface.h" />
+    <ClInclude Include="FuncWithCounter.h" />
     <ClInclude Include="Optimizer.h" />
     <ClInclude Include="OptimizerInterface.h" />
     <ClInclude Include="Simplex.h" />
     <ClInclude Include="SimplexOps.h" />
     <ClInclude Include="SimplexStream.h" />
     <ClInclude Include="StateInterfaceh.h" />
+    <ClInclude Include="StateWithMemory.h" />
     <ClInclude Include="Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
