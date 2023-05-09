@@ -16,9 +16,9 @@ namespace OptLib
 				return State->IsConverged(abs_tol, rel_tol);
 			}
 
-			template<typename algo, /*typename state,*/	//algorithm, state type(can be different from algos state
+			template<typename algo, typename state,	//algorithm, state type(can be different from algos state
 				template<size_t dim> typename func>
-			static PointVal<dim> Proceed(algo::state_type* State, const func<dim>* f)
+			static PointVal<dim> Proceed(state* State, const func<dim>* f)
 			{
 				return algo::Proceed(*State, f);
 			}

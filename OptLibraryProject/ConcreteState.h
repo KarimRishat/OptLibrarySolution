@@ -63,7 +63,11 @@ namespace OptLib
 				return true;
 			}
 
-			virtual
+			virtual void UpdateState(const PointVal<dim>& v)
+			{
+				dx = abs<dim>(v - this->Guess());
+				this->its_guess = v;
+			}
 
 		};
 
@@ -81,6 +85,17 @@ namespace OptLib
 				double alpha, double beta, double gamma):
 				StateDirect<dim>(std::move(State), f),
 				alpha{ alpha }, beta{ beta }, gamma{ gamma }{}
+		};
+
+
+		template<size_t dim>
+		class StateNewton :public StatePoint<dim>
+		{
+		public:
+			StateNewton(Point<dim>&& x0, const FuncInterface::IFuncWithHess<dim>* f)
+			{
+				this->its_guess = FuncInterface::CreateFromPoint<dim>(std::move(x0), f);
+			}
 		};
 
 		

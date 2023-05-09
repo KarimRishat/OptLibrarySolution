@@ -64,5 +64,8 @@ int main()
 
 
     /*Tests State*/
-    Tests::SegmentTest();
+    //Tests::SegmentTest();
+
+
+    Tests::testOverallOptimizerWithNewton();
 }
