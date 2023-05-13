@@ -31,13 +31,16 @@ namespace OptLib
 			bool g = false;
 			while (!g && s<MaxIterCount())
 			{
-				
+				std::cout << "Current state: " << State->Guess() << "\n";
 				/*State = */OptimizerInterface::OptimizerAlgorithm<dim>::
 					template Proceed< algo, state, func/*<dim>*/>(State, f);
 				++s;
 				g = OptimizerInterface::OptimizerAlgorithm<dim>
 					::IsConverged(State, tol_x(), tol_f());
 			}
+			std::cout << "Optimization ended\n";
+			std::cout << "Total number of iterations is s = " << CurIterCount() << '\n';
+			std::cout << "Final guess is x = " << CurrentGuess() << '\n';
 			return CurrentGuess();
 		}
 

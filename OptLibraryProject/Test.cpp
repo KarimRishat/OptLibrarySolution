@@ -481,7 +481,7 @@ void Tests::testOverallOptimizerWithNewton()
     std::cout << "Optimization with Newton finalized.\n";
 
     		std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
-    		std::cout << "Final guess is x = " << opt.CurrentGuess() << '\n';
+    		std::cout << "Final guess is  " << opt.CurrentGuess() << '\n';
     std::cout << "******OverallOptimizer With Newton test end*******\n\n";
 }
 
