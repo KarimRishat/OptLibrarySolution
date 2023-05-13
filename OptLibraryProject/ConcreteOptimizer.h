@@ -96,7 +96,8 @@ namespace OptLib
 			(ConcreteState::StateNewton<dim>& State,
 				const FuncInterface::IFunc<dim>* f)*/
 		protected:
-			static Point<dim> GaussSolver(FuncInterface::IHess<dim> A, FuncInterface::IGrad<dim> B)
+			/*static Point<dim> GaussSolver(FuncInterface::IHess<dim> A, FuncInterface::IGrad<dim> B)*/
+			static Point<dim> GaussSolver(SetOfPoints<dim, Point<dim>> A, Point<dim> B)
 			{
 				// forward loop
 				for (int i = 0; i < dim; i++)
@@ -131,9 +132,9 @@ namespace OptLib
 			static PointVal<dim> Proceed(ConcreteState::StateNewton<dim>& State, const FuncInterface::IFuncWithHess<dim>* f)
 			{
 				const auto& g = State.Guess();
-				Point<dim> dx{ GaussSolver(f->hess(g.P), -1 * f->grad(g.P)) };
+				Point<dim> dx{ GaussSolver(f->hess(g.p), -1 * f->grad(g.p)) };
 
-				State.UpdateState(FuncInterface::CreateFromPoint<dim>(g.P + dx, f));
+				State.UpdateState(FuncInterface::CreateFromPoint<dim>(g.p + dx, f));
 				return State.Guess();
 			}
 

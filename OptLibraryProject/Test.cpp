@@ -467,22 +467,21 @@ void Tests::testOverallOptimizerWithNewton()
     std::cout << "******OverallOptimizer With Newton test start*****\n";
 
     OptimizerPrm prm{ 0.001, 0.001, 10 };
-    Point<2> x{ 1, 2 };
     Point<2> p1{ 3.0, 5.0 };
     Point<2> p2{ 3, 4 };
     OptLib::SetOfPoints<2, Point<2>> A{ p1, p2 };
-    ConcreteFunc::paraboloid<2>* f = new ConcreteFunc::paraboloid<2>{ std::move(A) };
+    FuncInterface::IFuncWithHess<2>* f = new ConcreteFunc::paraboloid<2>{ std::move(A) };
 
     //ConcreteFunc::Rozenbrok f{};
     ConcreteState::StateNewton<2> State{ {3.8,0.3}, f };
 
-    Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess> opt{ &State, f, prm };
+    Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, f, prm };
     std::cout << "Optimization with Newton started...\n";
     opt.Optimize<ConcreteOptimizer::Newton<2>>();
     std::cout << "Optimization with Newton finalized.\n";
 
-    //		std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
-    //		std::cout << "Final guess is x = " << opt.CurrentGuess() << '\n';
+    		std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
+    		std::cout << "Final guess is x = " << opt.CurrentGuess() << '\n';
     std::cout << "******OverallOptimizer With Newton test end*******\n\n";
 }
 

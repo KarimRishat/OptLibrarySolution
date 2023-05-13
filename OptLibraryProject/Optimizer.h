@@ -12,7 +12,7 @@ namespace OptLib
 
 
 	template <size_t dim, typename state,
-		template<size_t dim> typename func>
+		/*template<size_t dim> */typename func>
 	class Optimizer
 	{
 	public:
@@ -21,7 +21,7 @@ namespace OptLib
 			return State->Guess();
 		}
 
-		Optimizer(state* State, func<dim>* f,
+		Optimizer(state* State, func* f,
 			OptimizerPrm prm) : State{ State }, f{ f },	//param - prm
 			Prm{ prm }, s{ 0 }{}	//s  - size-t
 
@@ -32,8 +32,8 @@ namespace OptLib
 			while (!g && s<MaxIterCount())
 			{
 				
-				State = OptimizerInterface::OptimizerAlgorithm<dim>::
-					Proceed< algo, state, func<dim>>(State, f);
+				/*State = */OptimizerInterface::OptimizerAlgorithm<dim>::
+					template Proceed< algo, state, func/*<dim>*/>(State, f);
 				++s;
 				g = OptimizerInterface::OptimizerAlgorithm<dim>
 					::IsConverged(State, tol_x(), tol_f());
@@ -56,7 +56,7 @@ namespace OptLib
 
 	protected:
 		state* State;
-		func<dim>* f;
+		func* f;
 		size_t s;		
 		OptimizerPrm Prm;
 
