@@ -70,5 +70,6 @@ namespace Tests
     void SegmentTest(); 
     void testOverallOptimizerWithNewton();
 
+    void testRosenbrok();
 }
 

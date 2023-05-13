@@ -485,3 +485,22 @@ void Tests::testOverallOptimizerWithNewton()
     std::cout << "******OverallOptimizer With Newton test end*******\n\n";
 }
 
+void Tests::testRosenbrok()
+{
+    std::cout << "******OverallOptimizer With Newton test start*****\n";
+
+    OptimizerPrm prm{ 0.001, 0.001, 50 };
+    //ConcreteFunc::Paraboloid2D f{ SetOfPoints<5,Point<5>>{ { {1,1,1,0}, {0,1}}} };
+    ConcreteFunc::Rozenbrok f{};
+    ConcreteState::StateNewton<2> State{ {3.8,0.3}, &f };
+
+    Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, &f, prm };
+    std::cout << "Optimization with Newton started...\n";
+    opt.Optimize<ConcreteOptimizer::Newton<2>>();
+    std::cout << "Optimization with Newton finalized.\n";
+
+    std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
+    std::cout << "Final guess is  " << opt.CurrentGuess() << '\n';
+    std::cout << "******OverallOptimizer With Newton test end*******\n\n";
+}
+
