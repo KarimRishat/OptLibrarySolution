@@ -69,6 +69,6 @@ namespace Tests
     //optim
     void SegmentTest(); 
     void testOverallOptimizerWithNewton();
-
+    void testNelderMead();
 }
 

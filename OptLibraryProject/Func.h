@@ -209,5 +209,21 @@ namespace OptLib
 		};
 
 
+		class Himmel : public FuncInterface::IFuncWithHess<2>
+		{
+		public:
+			double operator()(const Point<2>& p) const override
+			{
+				return (p[0] * p[0] + p[1] - 11) * (p[0] * p[0] + p[1] - 11) +
+					(p[0] * p[0] + p[1] - 7) * (p[0] * p[0] + p[1] - 7);
+			}
+
+		};
+
+		Point<2> grad(const Point<2>& p) const override
+		{
+
+		}
+
 	}
 }

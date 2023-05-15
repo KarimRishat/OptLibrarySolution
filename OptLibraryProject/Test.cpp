@@ -456,7 +456,6 @@ void Tests::SegmentTest()
     ConcreteState::StateSegment State{ {0.0,1.0} , &f };
     std::cout << "state1\n" << State.GuessDomain();
     std::cout << "\nis converged:  " << State.IsConverged(0.01, 0.01) << "\n";
-
     State.UpdateDomain({ -7,2.0 }, &f);
     std::cout << "\nstate2\n" << State.GuessDomain();
     std::cout << "\nis converged:  " << State.IsConverged(0.01, 0.01) << "\n";
@@ -464,8 +463,6 @@ void Tests::SegmentTest()
 
 void Tests::testOverallOptimizerWithNewton()
 {
-    std::cout << "******OverallOptimizer With Newton test start*****\n";
-
     OptimizerPrm prm{ 0.001, 0.001, 10 };
     Point<2> p1{ 3.0, 5.0 };
     Point<2> p2{ 3, 4 };
@@ -473,15 +470,28 @@ void Tests::testOverallOptimizerWithNewton()
     FuncInterface::IFuncWithHess<2>* f = new ConcreteFunc::paraboloid<2>{ std::move(A) };
 
     //ConcreteFunc::Rozenbrok f{};
-    ConcreteState::StateNewton<2> State{ {3.8,0.3}, f };
+    ConcreteState::StateNewton<2> State{ {13.8,10.3}, f };
 
     Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, f, prm };
     std::cout << "Optimization with Newton started...\n";
     opt.Optimize<ConcreteOptimizer::Newton<2>>();
     std::cout << "Optimization with Newton finalized.\n";
-
-    		std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
-    		std::cout << "Final guess is  " << opt.CurrentGuess() << '\n';
-    std::cout << "******OverallOptimizer With Newton test end*******\n\n";
+    std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
+    std::cout << "Final guess is  " << opt.CurrentGuess() << '\n';
 }
+
+//void Tests::testNelderMead()
+//{
+//    OptimizerPrm prm{ 0.001, 0.001, 10 };
+//    Point<2> p1{ 3.0, 5.0 };
+//    Point<2> p2{ 3, 4 };
+//    double alpha = 1.0, beta = 2.0, gamma = 3.0;
+//    OptLib::SetOfPoints<2, Point<2>> A{ p1, p2 };
+//    FuncInterface::IFuncWithHess<2>* f = new ConcreteFunc::paraboloid<2>{ std::move(A) };
+//    ConcreteState::StateNelderMead<2> State{ {10.1,5.2}, f,alpha,beta,gamma };
+//    Optimizer<2, ConcreteState::StateNelderMead<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, f, prm };
+//    opt.Optimize<ConcreteOptimizer::NelderMead<2>>();
+//    std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
+//    std::cout << "Final guess is  " << opt.CurrentGuess() << '\n';
+//}
 
