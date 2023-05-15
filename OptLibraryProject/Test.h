@@ -71,5 +71,7 @@ namespace Tests
     void testOverallOptimizerWithNewton();
 
     void testRosenbrok();
+    void testNelderMead();
+    void testHimmel();
 }
 
