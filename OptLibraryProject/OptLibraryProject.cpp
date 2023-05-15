@@ -69,4 +69,5 @@ int main()
 
     Tests::testOverallOptimizerWithNewton();
     Tests::testNelderMead();
+    Tests::testHimmel();
 }

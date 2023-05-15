@@ -468,10 +468,21 @@ void Tests::testOverallOptimizerWithNewton()
     Point<2> p2{ 3, 4 };
     OptLib::SetOfPoints<2, Point<2>> A{ p1, p2 };
     FuncInterface::IFuncWithHess<2>* f = new ConcreteFunc::paraboloid<2>{ std::move(A) };
-
-    //ConcreteFunc::Rozenbrok f{};
     ConcreteState::StateNewton<2> State{ {13.8,10.3}, f };
 
+    Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, f, prm };
+    std::cout << "Optimization with Newton started...\n";
+    opt.Optimize<ConcreteOptimizer::Newton<2>>();
+    std::cout << "Optimization with Newton finalized.\n";
+    std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
+    std::cout << "Final guess is  " << opt.CurrentGuess() << '\n';
+}
+
+void Tests::testHimmel()
+{
+    OptimizerPrm prm{ 0.001, 0.001, 10 };
+    FuncInterface::IFuncWithHess<2>* f = new ConcreteFunc::Himmel{};
+    ConcreteState::StateNewton<2> State{ {13.8,10.3}, f };
     Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, f, prm };
     std::cout << "Optimization with Newton started...\n";
     opt.Optimize<ConcreteOptimizer::Newton<2>>();
@@ -494,4 +505,5 @@ void Tests::testOverallOptimizerWithNewton()
 //    std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
 //    std::cout << "Final guess is  " << opt.CurrentGuess() << '\n';
 //}
+
 
