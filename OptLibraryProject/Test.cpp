@@ -480,11 +480,11 @@ void Tests::testOverallOptimizerWithNewton()
 
 void Tests::testHimmel()
 {
-    OptimizerPrm prm{ 0.001, 0.001, 10 };
+    OptimizerPrm prm{ 0.00001, 0.00001, 100 };
     FuncInterface::IFuncWithHess<2>* f = new ConcreteFunc::Himmel{};
-    ConcreteState::StateNewton<2> State{ {13.8,10.3}, f };
+    ConcreteState::StateNewton<2> State{ {10.0,-10.1}, f };
     Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, f, prm };
-    std::cout << "Optimization with Newton started...\n";
+    std::cout << "\n\nOptimization Himmel with Newton started...\n";
     opt.Optimize<ConcreteOptimizer::Newton<2>>();
     std::cout << "Optimization with Newton finalized.\n";
     std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
@@ -493,20 +493,34 @@ void Tests::testHimmel()
 
 void Tests::testRosenbrok()
 {
-    std::cout << "******OverallOptimizer With Newton test start*****\n";
 
-    OptimizerPrm prm{ 0.001, 0.001, 50 };
-    //ConcreteFunc::Paraboloid2D f{ SetOfPoints<5,Point<5>>{ { {1,1,1,0}, {0,1}}} };
+    OptimizerPrm prm{ 0.000001, 0.000001, 50 };
     ConcreteFunc::Rozenbrok f{};
-    ConcreteState::StateNewton<2> State{ {3.8,0.3}, &f };
+    ConcreteState::StateNewton<2> State{ {3,2}, &f };
 
     Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, &f, prm };
-    std::cout << "Optimization with Newton started...\n";
+    std::cout << "\n\nOptimization Rosenbrok with Newton started...\n";
     opt.Optimize<ConcreteOptimizer::Newton<2>>();
     std::cout << "Optimization with Newton finalized.\n";
 
     std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
     std::cout << "Final guess is  " << opt.CurrentGuess() << '\n';
-    std::cout << "******OverallOptimizer With Newton test end*******\n\n";
+}
+
+void Tests::testNelderMead()
+{
+    //OptimizerPrm prm{ 0.001, 0.001, 50 };
+    ////ConcreteFunc::Paraboloid2D f{ SetOfPoints<5,Point<5>>{ { {1,1,1,0}, {0,1}}} };
+    //ConcreteFunc::Rozenbrok f{};
+    //double alpha = 1.0, beta = 2.0, gamma = 3.0;
+    //ConcreteState::StateNelderMead<2> State{ {0.8,1.3}, &f, alpha, beta, gamma };
+    //Optimizer<2,ConcreteState::StateNelderMead<2>, 
+    //    FuncInterface::IFuncWithHess<2>> opt{ &State, &f, prm };
+    //std::cout << "\n\nOptimization Rosenbrok with NelderMead started...\n";
+    //opt.Optimize<ConcreteOptimizer::NelderMead<2>>();
+    //std::cout << "Optimization with NelderMead finalized.\n";
+
+    //std::cout << "Total number of iterations is s = " << opt.CurIterCount() << '\n';
+    //std::cout << "Final guess is  " << opt.CurrentGuess() << '\n';
 }
 

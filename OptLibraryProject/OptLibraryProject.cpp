@@ -67,7 +67,7 @@ int main()
     //Tests::SegmentTest();
 
 
-    Tests::testOverallOptimizerWithNewton();
+    //Tests::testOverallOptimizerWithNewton();
     Tests::testRosenbrok();
     Tests::testNelderMead();
     Tests::testHimmel();
