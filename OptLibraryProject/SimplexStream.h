@@ -24,10 +24,7 @@ Stream& operator << (Stream& o, const OptLib::PointVal<dim>& p)
 		o << ", " << p[i];
 	}
 	o << ")\tf(x) = "<<p.val;
-	std::ostream os;
-	os.setf(std::ios::left);
-	os.width(50);
-	return os<<o;
+	return o;
 }
 
 template <class Stream, size_t count, typename point>
