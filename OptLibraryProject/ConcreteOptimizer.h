@@ -140,13 +140,11 @@ namespace OptLib
 
 		};//class Newton
 
-		template< size_t dim>
+		/*template< size_t dim>
 		struct NewtonParams
 		{
 		public:
-			using OptAlgo = OptLib::ConcreteOptimizer::Newton<dim>;
 			using StateType = ConcreteState::StateNewton<dim>;
-
 		public:
 			Point<dim> StartPoint;
 			NewtonParams(Point<dim>&& sop)
@@ -156,7 +154,7 @@ namespace OptLib
 			{
 				return { std::move(StartPoint), f };
 			}
-		};
+		};*/
 
 
 	}

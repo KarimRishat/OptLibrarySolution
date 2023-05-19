@@ -482,7 +482,7 @@ void Tests::testHimmel()
 {
     OptimizerPrm prm{ 0.00001, 0.00001, 100 };
     FuncInterface::IFuncWithHess<2>* f = new ConcreteFunc::Himmel{};
-    ConcreteState::StateNewton<2> State{ {10.0,-10.1}, f };
+    ConcreteState::StateNewton<2> State{ {-10.0,-10.1}, f };
     Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, f, prm };
     std::cout << "\n\nOptimization Himmel with Newton started...\n";
     opt.Optimize<ConcreteOptimizer::Newton<2>>();
@@ -494,9 +494,9 @@ void Tests::testHimmel()
 void Tests::testRosenbrok()
 {
 
-    OptimizerPrm prm{ 0.000001, 0.000001, 50 };
+    OptimizerPrm prm{ 0.00000001, 0.00000001, 50 };
     ConcreteFunc::Rozenbrok f{};
-    ConcreteState::StateNewton<2> State{ {3,2}, &f };
+    ConcreteState::StateNewton<2> State{ {-3,-3}, &f };
 
     Optimizer<2, ConcreteState::StateNewton<2>, FuncInterface::IFuncWithHess<2>> opt{ &State, &f, prm };
     std::cout << "\n\nOptimization Rosenbrok with Newton started...\n";
